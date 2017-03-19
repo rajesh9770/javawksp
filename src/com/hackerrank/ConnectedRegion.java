@@ -16,10 +16,58 @@ class ConnectedRegion {
                 grid[grid_i][grid_j] = in.nextInt();
             }
         }
-        System.out.println(getBiggestRegion(grid, n, m));
+        //System.out.println(getBiggestRegion(grid, n, m));
+        System.out.println(getBiggestConnectedComponent(grid, n, m));
 
 	}
 
+	private static long getBiggestConnectedComponent(int[][] grid, int n, int m) {
+		long maxRegion= Long.MIN_VALUE;
+		boolean [][] explored = new boolean[n][m];
+		for(int i=0; i<n; ++i){
+			for(int j=0; j<m; ++j){
+				explored[i][j] = false;
+			}
+		}
+		for(int i=0; i<n; ++i){
+			for(int j=0; j<m; ++j){
+				if(!explored[i][j] && grid[i][j] == 1) {
+					long ct = DFS(grid, explored, i, j);
+					if(maxRegion < ct) maxRegion = ct;
+				}
+			}
+		}
+		return maxRegion;
+	}
+
+	private static long DFS(int[][] grid, boolean [][] explored, int i, int j) {
+		explored[i][j] = true;
+		int n = grid.length;
+		int m = grid[0].length;
+		long componentSize = 1;
+	
+		if(i-1>=0 && j-1>=0 && !explored[i-1][j-1] && grid[i-1][j-1]==1)
+			componentSize +=DFS(grid, explored, i-1, j-1);
+		if(i-1>=0 && !explored[i-1][j] && grid[i-1][j]==1)
+			componentSize +=DFS(grid, explored, i-1, j);
+		if(i-1>=0 && j+1 <m && !explored[i-1][j+1]  && grid[i-1][j+1]==1)
+			componentSize +=DFS(grid, explored, i-1, j+1);
+		if(j-1>=0 && !explored[i][j-1] && grid[i][j-1]==1)
+			componentSize +=DFS(grid, explored, i, j-1);		
+		if(j+1 <m && !explored[i][j+1] && grid[i][j+1]==1)
+			componentSize +=DFS(grid, explored, i, j+1);
+		if(i+1<n && j-1>=0 && !explored[i+1][j-1] && grid[i+1][j-1]==1)
+			componentSize +=DFS(grid, explored, i+1, j-1);
+		if(i+1<n && !explored[i+1][j] && grid[i+1][j]==1)
+			componentSize +=DFS(grid, explored, i+1, j);
+		if(i+1<n && j+1 <m && !explored[i+1][j+1] && grid[i+1][j+1]==1)
+			componentSize +=DFS(grid, explored, i+1, j+1);
+		
+		return componentSize;
+		
+	}
+	
+	
 	private static long countCells(int[][] grid, int i, int j){
 		if(i<0 || j<0 || i>=grid.length || j >=grid[0].length) return 0;
 		if(grid[i][j] == 0 ) return 0;

@@ -71,6 +71,19 @@ public class Graph<T,E> {
         return ret;
     }
 
+    public long DFS_CompSize(Node<Integer,E> node, Map<E, Boolean> explored){
+        long ret = 1;
+        explored.put(node.id, true);
+        
+        for(Node<Integer,E> adNode:node.adjList){
+            Boolean exp = explored.get(adNode.id);
+            if(exp == null || !exp)
+                ret += DFS_CompSize(adNode, explored);
+        }
+        
+        return ret;
+    }
+    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int N = in.nextInt();

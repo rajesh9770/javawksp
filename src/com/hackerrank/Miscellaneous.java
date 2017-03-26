@@ -559,8 +559,27 @@ ZZYYZZYYZZZAZZZB
         int testcases = in.nextInt();
         
         while(testcases-- >0){
-            BigInteger n = new BigInteger(in.nextLine());
-            System.out.println(n.multiply(n));
+            int n = in.nextInt();
+            int [] arr = new int [n];
+            for(int i=0; i<n; ++i) arr[i] = in.nextInt();
+            long inversions = 0;
+            for(int i=0; i<n; ++i){
+            	for(int j=i+1; j<n; ++j){
+            		if(arr[i] > arr[j]) ++inversions;
+            	}            		
+            }
+            
+            System.out.println(inversions %2 == 0 ? "YES" : "NO");
         }
     }
+    
+//    public static void Samplemain(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        int testcases = in.nextInt();
+//        
+//        while(testcases-- >0){
+//            BigInteger n = new BigInteger(in.nextLine());
+//            System.out.println(n.multiply(n));
+//        }
+//    }
 }

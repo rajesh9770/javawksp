@@ -19,7 +19,6 @@ public class LRU<K,V> {
             this.data = data;
             prev=next=null;
         }
-
     }
 
     private Map<K,Node<K,V>> cache;

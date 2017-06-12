@@ -30,7 +30,7 @@ public class Practice {
         System.out.println(longOnes);
     }
 
-    public static void main(String[] args) {
+    public static void mainForStrangeCounter(String[] args) {
         Scanner in = new Scanner(System.in);
         long n = in.nextLong();
         long counter = 3;
@@ -42,5 +42,20 @@ public class Practice {
         //counter maps to 1, counter-1 maps to 2, ...
         System.out.println(counter-n+1);
     }
-}
 
+    public static void mainForSaveThePrisoner(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        for (int a0 = 0; a0 < t; a0++) {
+            long n = in.nextInt();
+            long m = in.nextInt();
+            long s = in.nextInt();
+            //System.out.println(m % n);
+            long result = (s - 2) + m % n;
+            result +=n;
+            result %= n;
+            //System.out.println(result%n+1);
+            System.out.println(result + 1);
+        }
+    }
+}

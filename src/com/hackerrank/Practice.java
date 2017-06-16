@@ -1,6 +1,9 @@
 package com.hackerrank;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
 
 /**
  * Created by Rajesh on 5/29/2017.
@@ -56,6 +59,64 @@ public class Practice {
             result %= n;
             //System.out.println(result%n+1);
             System.out.println(result + 1);
+        }
+    }
+
+    private static void HappyLadyBugs(String b){
+        if(b.indexOf('_') == -1 ){
+            for(int i=0; i<b.length(); ){
+                if(i>0 && (b.charAt(i) == b.charAt(i-1))) ++i;
+                else if(i<b.length()-1 && b.charAt(i) == b.charAt(i+1)) i+=2;
+                else {
+                    System.out.println("NO");
+                    return;
+                }
+            }
+            System.out.println("YES");
+            return;
+        }
+
+        Map<Character, Integer> counts = new HashMap<>();
+        for(int i=0; i<b.length(); ++i){
+            if(b.charAt(i) == '_') continue;
+            Integer count = counts.get(b.charAt(i));
+            if(count == null) count = 1;
+            else count = count +1;
+            counts.put(b.charAt(i), count);
+        }
+        for(Map.Entry<Character, Integer> items : counts.entrySet()){
+            if(items.getValue() == 1){
+                System.out.println("NO");
+                return;
+            }
+        }
+        System.out.println("YES");
+    }
+
+    public static void mainForValley(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String str = in.next();
+        char[] chars = str.toCharArray();
+        long valleyCount = 0;
+        long upSteps = 0, downSteps = 0;
+        for(char c: chars){
+            if( (upSteps == downSteps) && c == 'D'){
+                ++valleyCount;
+            }
+            if (c=='D') downSteps++;
+            if (c=='U') upSteps++;
+        }
+        System.out.println(valleyCount);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int Q = in.nextInt();
+        for(int a0 = 0; a0 < Q; a0++) {
+            int n = in.nextInt();
+            String b = in.next();
+            HappyLadyBugs(b);
         }
     }
 }

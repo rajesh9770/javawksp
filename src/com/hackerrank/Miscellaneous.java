@@ -554,7 +554,7 @@ ZZYYZZYYZZZAZZZB
         return Math.max(diff[0][len-1], diff[1][len-1]);
     }
     
-    public static void main(String[] args) {
+    public static void mainForInversions(String[] args) {
         Scanner in = new Scanner(System.in);
         int testcases = in.nextInt();
         
@@ -573,6 +573,21 @@ ZZYYZZYYZZZAZZZB
         }
     }
     
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        for(int a0 = 0; a0 < t; a0++){
+            long n = in.nextInt();
+            long m = in.nextInt();
+            long s = in.nextInt();
+            System.out.println(m%n);
+            long result = (s-1) + m%n ;
+            result--;            
+            //System.out.println(result%n+1);
+            System.out.println((s+m-2)%n + 1);
+        }
+    }
+//}
 //    public static void Samplemain(String[] args) {
 //        Scanner in = new Scanner(System.in);
 //        int testcases = in.nextInt();

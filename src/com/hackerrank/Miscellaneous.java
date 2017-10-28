@@ -38,15 +38,17 @@ public class Miscellaneous {
         }
         return result;
     }
-    
-     public static int gcd(int a, int b) {
+
+    //Euclid's algorithm
+     public static int gcd(int dividend, int divisor) {
         int t;
-        while (b != 0) {
-            t = b;
-            b = a % b; // a mod b
-            a = t;
+        while (divisor != 0) {
+            t = divisor;
+            int remainder = dividend % divisor; // a mod b
+            dividend = t; //previous divisor becomes dividend
+            divisor = remainder; //remainder becomes divisor
         }
-        return a;
+        return dividend;
     }
     
     //Closest Number

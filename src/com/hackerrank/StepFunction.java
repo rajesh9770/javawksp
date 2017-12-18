@@ -16,7 +16,6 @@ Numbers in list are numbered from  to .
 2 5 100
 3 4 100
 Ans: 200
- * @author manjrr
  *
  */
 public class StepFunction {

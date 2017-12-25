@@ -1,6 +1,8 @@
 *.class
 target/
 testcases/
+#data/
+src/com/hackerrank/DoNotCheckIn/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

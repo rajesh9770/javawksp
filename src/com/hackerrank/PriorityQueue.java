@@ -99,7 +99,7 @@ public class PriorityQueue<E extends Comparable<E>> {
         if (i < 0 || i >= maxSize) throw new IndexOutOfBoundsException();
         if (!contains(i)) throw new NoSuchElementException("index is not in the priority queue");
         if (keys[i].compareTo(key) >= 0)
-            throw new IllegalArgumentException("Calling increaseKey() with given argument would not strictly increase the key");
+            throw new IllegalArgumentException("Calling increaseVal() with given argument would not strictly increase the key");
         keys[i] = key;
         sink(qp[i]);
     }
@@ -142,7 +142,13 @@ public class PriorityQueue<E extends Comparable<E>> {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		PriorityQueue<Long> pQ = new PriorityQueue<>(4);
+		pQ.insert(1, 100l);
+		pQ.insert(2,80l);
+        pQ.insert(3,80l);
+        pQ.delete(1);
+        pQ.insert(1,10l);
+        System.out.println(pQ.minKey());
 
 	}
 

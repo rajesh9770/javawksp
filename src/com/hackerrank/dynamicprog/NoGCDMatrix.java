@@ -8,8 +8,7 @@ import java.util.*;
 /**
  * Created by Rajesh on 1/7/2018.
  */
-//https://github.com/2997ms/some-problems/blob/master/Hackerrank/HourRank_17/GCD%20Matrix.cpp
-public class GCDMatrix {
+public class NoGCDMatrix {
 
 //    private static Map<Integer, Integer> gcd;
     private static int n, m;

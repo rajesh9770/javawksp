@@ -1,5 +1,7 @@
 package com.hackerrank;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -21,10 +23,10 @@ public class EqualChocolates {
 
 		
 	public static long countSteps(int a, int target) {
-		int delta = (a-target);
-		int fiveSteps = delta /5;
-		int twoSteps = (delta %5) /2;
-		int oneSteps = (delta %5) %2;
+		long delta = (a-target);
+		long fiveSteps = delta /5;
+		long twoSteps = (delta %5) /2;
+		long oneSteps = (delta %5) %2;
 		return fiveSteps + twoSteps + oneSteps;
 	}
 	
@@ -37,7 +39,7 @@ public class EqualChocolates {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         while(n-->0){
@@ -50,7 +52,7 @@ public class EqualChocolates {
         	}
         	
         	long minSteps = Long.MAX_VALUE;
-        	for(int i = min; i>=Math.max(0, min-4); --i){        		
+        	for(int i = min; i>=min-2; --i){
         		long steps = process(a, i);
         		//System.out.println("Target " + i  + " " + steps);
         		if(steps < minSteps) minSteps = steps;

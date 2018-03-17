@@ -38,13 +38,15 @@ public class LRU<K,V> {
             evictFromList(node);
             setHeadOfList(node);
             return;
-        }else  if(cache.size() >= size) {
-            cache.remove(tail.key);
-            evictFromList(tail);
+        }else{
+            if(cache.size() >= size) {
+                cache.remove(tail.key);
+                evictFromList(tail);
+            }
+            Node newNode = new Node(key, val);
+            cache.put(key, newNode);
+            setHeadOfList(newNode);
         }
-        Node newNode = new Node(key, val);
-        cache.put(key, newNode);
-        setHeadOfList(newNode);
     }
 
     /**
@@ -116,5 +118,23 @@ public class LRU<K,V> {
         System.out.println(cache.get(1));       // returns -1 (not found)
         System.out.println(cache.get(3));       // returns 3
         System.out.println(cache.get(4));       // returns 4
+    }
+
+    private void removeFromList(Node n){
+        assert (n != null);
+        if(n.prev != null){
+            n.prev.next = n.next;
+        }else{
+            head = n.next;
+        }
+        if(n.next != null){
+            n.next.prev = n.prev;
+        }else{
+            tail = n.prev;
+        }
+    }
+
+    private void setHead(Node n){
+
     }
 }

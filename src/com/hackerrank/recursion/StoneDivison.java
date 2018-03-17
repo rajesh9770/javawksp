@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * Created by Rajesh on 2/25/2018.
+ * http://gautamdp.blogspot.com/2016/12/taras-beautiful-permutationsnumber-of.html
  *  Ans_X is denoting maximum number of moves for single pile with height X
  In case no divisors of number  X from set S , Ans_X =0, otherwise  Ans_X = max( X/Y * Ans_Y)
  for all Y such that X mod Y = 0  and Y !=X .

@@ -589,7 +589,52 @@ ZZYYZZYYZZZAZZZB
             System.out.println((s+m-2)%n + 1);
         }
     }
-//}
+
+    public static int clockProblem(int hour, int min){
+
+        hour %= 12;
+        min %= 60;
+
+        //min hand moves 360 degree in 60 min i.e. 6 degree in 1 min
+        //hour hand moves 30 degree in 60 min i.e. 0.5 degree in 1 min
+        // Calculate the angles moved by hour and minute hands
+        // with reference to 12:00
+        int hour_angle = (int)(0.5 * (hour*60 + min));
+        int minute_angle = (int)(6*min);
+        // Find the difference between two angles
+        int angle = Math.abs(hour_angle - minute_angle);
+
+        // smaller angle of two possible angles
+        angle = Math.min(360-angle, angle);
+
+        return angle;
+    }
+
+    public static void mainForSquares(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        while(q-->0){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            int g = gcd(a,b);
+            System.out.println(a*b/g*g);
+        }
+    }
+
+    public static void mainForTriangle(String [] args){
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        while(q-->0){
+            int n = in.nextInt();
+            //f(x) = 2 if x is edd
+            //       3 if 4|x
+            //       4 if 2|x
+            // prove by induction
+
+            System.out.println(n%2==1 ? 2 : n%4==0 ? 3: 4);
+        }
+    }
+//
 //    public static void Samplemain(String[] args) {
 //        Scanner in = new Scanner(System.in);
 //        int testcases = in.nextInt();

@@ -10,7 +10,7 @@ import java.util.Scanner;
  * (both inclusive).
  * First line will contain two integers  and  separated by a single space.
 Next  lines will contain three integers ,  and  separated by a single space.
-Numbers in list are numbered from  to .
+Numbers in list are numbered from   1 to n .
 5 3
 1 2 100
 2 5 100

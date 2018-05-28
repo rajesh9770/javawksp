@@ -2,6 +2,7 @@ package com.hackerrank.graphs.Trees;
 
 /**
  * Created by Rajesh on 3/11/2018.
+ * Remove the leafs of binary tree from Left to right and put it in a doubly linked list.
  */
 public class BinaryTreeLeafsLR {
 

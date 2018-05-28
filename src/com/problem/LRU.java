@@ -120,21 +120,6 @@ public class LRU<K,V> {
         System.out.println(cache.get(4));       // returns 4
     }
 
-    private void removeFromList(Node n){
-        assert (n != null);
-        if(n.prev != null){
-            n.prev.next = n.next;
-        }else{
-            head = n.next;
-        }
-        if(n.next != null){
-            n.next.prev = n.prev;
-        }else{
-            tail = n.prev;
-        }
-    }
 
-    private void setHead(Node n){
 
-    }
 }

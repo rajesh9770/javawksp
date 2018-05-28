@@ -15,7 +15,7 @@ public class MaxDifference {
 
     public static boolean findPairWithSum(int arr[], int sum){
 
-        int l = 0, r = arr.length;
+        int l = 0, r = arr.length-1;
         Arrays.sort(arr);
         while(l<r){
             int tmp = arr[l] + arr[r];

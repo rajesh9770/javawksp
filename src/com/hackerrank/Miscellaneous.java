@@ -50,7 +50,46 @@ public class Miscellaneous {
         }
         return dividend;
     }
-    
+
+    /**
+     *
+     * @param dividend
+     * @param divisor
+     * @return 0: gcd. 1: x 2: y where gcd = x * dividend + y * divisor
+     *
+     * g=gcd(a, b)= a * x1 + b * y1;
+     * g=gcd(b, a%b) = b * x2  + (a%b) * y2;
+     * a%b = a - floor(a/b)*b
+     * x1 = y2;
+     * y2 = x2 - y2 * floor(a/b);
+     * In java floor(a/b) = a/b -- integer divison
+     */
+    public static int[] extendedGCD(int dividend, int divisor){
+        int [] ret;
+        if(divisor == 0){
+            ret = new int[3];
+            ret[0] = dividend;
+            ret[1] = 1;
+            ret[2] = 0;
+        }else{
+            ret = extendedGCD(divisor, dividend % divisor);
+            int tmp = ret[1];
+            ret[1] = ret[2];
+            ret[2] = tmp - ret[2] * (dividend/divisor);
+        }
+        return ret;
+    }
+
+    public static void mainForExtendedGCD(String[] args) {
+        for(int i=2; i<100; ++i){
+            for(int j=1; j<i; ++j){
+                int[] rets = extendedGCD(i, j);
+                if(i*rets[1] + j*rets[2] != rets[0])
+                    System.out.println(i + " " + j + " " + rets[0] + " " + rets[1] + " " + rets[2]);
+            }
+        }
+    }
+
     //Closest Number
     public static long power(int a, int b, int x) {
         //5 2 7 Ans: 28
@@ -533,7 +572,34 @@ ZZYYZZYYZZZAZZZB
         }
         return wg[W];
     }
-    
+
+    /**
+     * Weights are in ascending order.
+     * Only one weight of size weights[i] is available.
+     * @param weights
+     * @param W
+     * @return
+     */
+    public static long BoundedKnapsack(int W, int [] weights){
+        long dp[][] = new long[W+1][weights.length];
+        for(int j=0;j<weights.length; ++j) dp[0][j] = 0; //if total weight allowed is 0, then only one solution exists, i.e. take no weights and total weight dp[0][w] is 0.
+        for(int i=0; i<W+1; ++i ){
+            //with just one weight weight[0], we can take only take weights[0] weight if allowed weight is greater or equal to weights[0].
+            dp[i][0] =   weights[0] >=i ? weights[0] : 0;
+        }
+
+        for(int i=1; i<W+1; ++i){
+            for(int j=1; j<weights.length; ++j){
+                if(i>=weights[j]){
+                    dp[i][j] = Math.max(dp[i][j-1], weights[j] + dp[i-weights[j]][j-1]);
+                }else{//can't take weight[j]
+                    dp[i][j] = dp[i][j-1];
+                }
+            }
+        }
+        return dp[W][weights.length-1];
+    }
+
     public static void mainForMaxDifferenceWithBounds(String[] args){
         Scanner in = new Scanner(System.in);
         int testcases = in.nextInt();
@@ -575,7 +641,7 @@ ZZYYZZYYZZZAZZZB
         }
     }
     
-    public static void main(String[] args) {
+    public static void mainTest(String[] args) {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
         for(int a0 = 0; a0 < t; a0++){
@@ -644,4 +710,47 @@ ZZYYZZYYZZZAZZZB
 //            System.out.println(n.multiply(n));
 //        }
 //    }
+
+        private static boolean isFibonacci(String buf){
+
+            for(int i=1; i<buf.length()-2; ++i){//[0, i)
+                for(int j=i+1; j<buf.length()-1; ++j){ //[i, j)
+                    long num1 = Long.parseLong(buf.substring(0,i));
+                    long num2 = Long.parseLong(buf.substring(i,j));
+                    long sum = num1 + num2;
+                    if(buf.substring(j).startsWith(""+sum))
+                        if (checkForFibonacci(buf.substring(i), j-i, (""+sum).length()))
+                            return true;
+
+                }
+            }
+            return false;
+        }
+
+    private static boolean checkForFibonacci(String str, int len1, int len2) {
+        if(len1 + len2 == str.length()) return  true;
+        if(len1 + len2 < str.length()){
+            long num1 = Long.parseLong(str.substring(0, len1));
+            long num2 = Long.parseLong(str.substring(len1, len1+len2));
+            long sum = num1 + num2;
+            if(str.substring(len1+len2).startsWith(""+sum))
+                return checkForFibonacci(str.substring(len1), len2, (""+sum).length());
+            else return false;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        StringBuilder buff=new StringBuilder();
+        long seeds[] = {12, 23};
+        buff.append(seeds[0]).append(seeds[1]);
+        for(int i=0; i<4; i++){
+            long sum = seeds[0] + seeds[1];
+            System.out.println(sum);
+            buff.append(sum);
+            seeds[0] = seeds[1];
+            seeds[1] = sum;
+        }
+        System.out.println(isFibonacci(buff.toString()));
+    }
 }

@@ -50,6 +50,10 @@ public class MaxStack {
         System.out.println(min);
     }
 
+    /**
+     * Find the maximum of stack
+     * @param args
+     */
     public static void mainMaxForStack(String[] args) {
         Scanner in = new Scanner(System.in);
         int q = in.nextInt();
@@ -62,7 +66,8 @@ public class MaxStack {
                 case 1:
                     int val = in.nextInt();
                     stk.push(val);
-                    if(currentMax <= val){
+                    if(currentMax <= val){ //should be <=, so that if there are more than one max elements on stack
+                                            //removal of one still keeps track of others
                         currentMax = val;
                         max_stk.push(val);
                     }

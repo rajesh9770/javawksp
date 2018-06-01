@@ -25,12 +25,14 @@ public class Median {
         int left = 0, right = arr.length-1;
         int half = (right-left+1)/2;
         while(left != right) {
-            int partition = partition(arr, left, right, (left + right) / 2);
-            if(partition == half) break;
-            else if(partition>half){
-                right = partition-1;
+            int pivotIdx = partition(arr, left, right, (left + right) / 2);
+            int numOfElementsLessPivot = pivotIdx-left;
+            if(numOfElementsLessPivot == half) break;
+            else if(numOfElementsLessPivot>half){
+                right = pivotIdx-1;
             }else{
-                left = partition+1;
+                left = pivotIdx+1;
+                half = half - numOfElementsLessPivot;
             }
         }
         return arr[half];

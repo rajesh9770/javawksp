@@ -33,7 +33,7 @@ public class MaxDifference {
      */
     static boolean findPair(int arr[], int n){
         Arrays.sort(arr);
-        int i=0, j=1; //IMPORTANT
+        int i=0, j=1; //j=1 saves one loop
         while(i<arr.length && j<arr.length){
             if(i!=j && arr[j]-arr[i] ==n){
                 return true;

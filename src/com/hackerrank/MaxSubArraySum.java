@@ -3,6 +3,9 @@ package com.hackerrank;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+/**
+ * Given an n-element array of integers and an integer m , determine the maximum value of the sum of any of its subarrays modulo m
+ */
 public class MaxSubArraySum {
 
     public static void main(String[] args) {

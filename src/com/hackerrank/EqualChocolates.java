@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Christy is interning at HackerRank. One day she has to distribute some chocolates to her colleagues. 
+ * Christy is interning at Sun Micro. One day she has to distribute some chocolates to her colleagues.
  * She is biased towards her friends and may have distributed the chocolates unequally. 
  * One of the program managers gets to know this and orders Christy to make sure everyone gets equal number of chocolates.
  * But to make things difficult for the intern, she is ordered to equalize the number of chocolates for every colleague in the following manner,

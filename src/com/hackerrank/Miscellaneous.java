@@ -62,7 +62,7 @@ public class Miscellaneous {
      * a%b = a - floor(a/b)*b
      * x1 = y2;
      * y2 = x2 - y2 * floor(a/b);
-     * In java floor(a/b) = a/b -- integer divison
+     * In java floor(a/b) = a/b -- integer division
      */
     public static int[] extendedGCD(int dividend, int divisor){
         int [] ret;

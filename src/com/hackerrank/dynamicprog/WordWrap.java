@@ -6,7 +6,8 @@ import java.util.stream.IntStream;
 
 /**
  * Created by Rajesh on 10/3/2017.
- * Given a sequence of words, and a limit on the number of characters that can be put in one line (line width). Put line breaks in the given sequence such that the lines are printed neatly.
+ * Given a sequence of words, and a limit on the number of characters that can be put in one line (line width).
+ * Put line breaks in the given sequence such that the lines are printed neatly.
  * Assume that the length of each word is smaller than the line width.
  * The extra spaces includes spaces put at the end of every line except the last one.
  * The problem is to minimize the following total cost.

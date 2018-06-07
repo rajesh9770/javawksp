@@ -26,5 +26,17 @@ public class MinHeap {
         System.out.println(minHeap.poll());
         System.out.println(minHeap.poll());
         System.out.println(minHeap.poll());
+
+        PriorityQueue<Integer> defaultHeap = new PriorityQueue<>();
+
+        defaultHeap.add(10);
+        defaultHeap.add(8);
+        defaultHeap.add(20);
+
+        System.out.println(defaultHeap.poll());
+        System.out.println(defaultHeap.poll());
+        System.out.println(defaultHeap.poll());
+
+
     }
 }

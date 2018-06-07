@@ -15,8 +15,8 @@ public class TrieContacts {
         private boolean isLast;
 
         private char id;
-        private int count;
-        public long numOfchildren; //optimization
+        private int exactMatches;
+        public long partialMatches; //optimization
 
         public TrieNode(char c) {
             this.id = c;
@@ -33,7 +33,7 @@ public class TrieContacts {
                 child = new TrieNode(next);
                 children.put(next, child);
             }
-            child.numOfchildren++; // increment this child. This implies root element will have numOfchildren = 0;
+            child.partialMatches++; // increment this child. Note that root element will have partialMatches = 0;
             if(startIdx+1<word.length) child.addWord(word, startIdx+1);
             else child.setLast();
         }
@@ -41,9 +41,14 @@ public class TrieContacts {
 
         public void setLast() {
             isLast = true;
-            count++; //keeps tracks of how many time this word was inserted in the trie.
+            exactMatches++; //keeps tracks of how many time this word was inserted in the trie.
         }
 
+        /**
+         * @deprecated use instead partialMatches
+         * @return
+         */
+        @Deprecated
         public long getNumOfChildren(){
             long ct = isLast ? 1 : 0;
             for(TrieNode child: children.values()){
@@ -78,7 +83,7 @@ public class TrieContacts {
                 if(node == null){
                     System.out.println("0");
                 }else{
-                    System.out.println(node.numOfchildren);
+                    System.out.println(node.partialMatches);
                 }
             }
         }

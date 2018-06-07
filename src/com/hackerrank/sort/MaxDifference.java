@@ -69,6 +69,11 @@ public class MaxDifference {
 
         int i=0, j=0;
         int indexDiff = -1;
+        /**
+         * While traversing LMin[] and RMax[] if we see that LMin[i] is greater than RMax[j],
+         * then we must move ahead in LMin[] (or do i++) because all elements on left of LMin[i] are greater than or equal to LMin[i].
+         * Otherwise we must move ahead in RMax[j] to look for a greater j – i value.
+         */
         while(i<a.length && j<a.length){
             if(LMin[i] <RMax[j]){
                 indexDiff = Math.max(indexDiff, j-i);

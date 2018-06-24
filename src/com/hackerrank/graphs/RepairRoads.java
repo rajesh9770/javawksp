@@ -1,7 +1,5 @@
 package com.hackerrank.graphs;
 
-import com.hackerrank.DoNotCheckIn.Solution;
-
 import java.io.*;
 import java.util.*;
 
@@ -26,7 +24,7 @@ public class RepairRoads {
     public static void main(String[] args) throws FileNotFoundException {
 
         //InputReader in = new InputReader(System.in);
-        InputReader in = new InputReader(new FileInputStream("C:\\Users\\manjrr\\workspace\\javawksp\\data\\repairRoad-5"));
+        InputReader in = new InputReader(new FileInputStream("C:\\Users\\myname\\workspace\\javawksp\\data\\repairRoad-5"));
         int q = in.nextInt();
         while(q-->0){
             n = in.nextInt();

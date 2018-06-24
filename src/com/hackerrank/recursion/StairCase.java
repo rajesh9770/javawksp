@@ -16,18 +16,14 @@ public class StairCase {
 
 
     private static long count(int remainingSteps){
-        if(remainingSteps == 0) return 0;
+        if(remainingSteps <= 0) return 0;
         if(remainingSteps == 1) return 1;
         if(remainingSteps == 2) return 2;
         if(remainingSteps == 3) return 4;
         if(cache.get(remainingSteps) != null) {
             return cache.get(remainingSteps) ;
         }
-        long count = 0; //since remaining steps >0, we know we will take at least one step
-        count += count(remainingSteps-1); //take one step;
-        if(remainingSteps>=2) {  count += count(remainingSteps-2);} //take two step;
-        if(remainingSteps>=3) {  count += count(remainingSteps-3);} //take three step;
-
+        long count = count(remainingSteps-1) + count(remainingSteps-2) + count(remainingSteps-3);
         cache.put(remainingSteps, count);
         return count;
     }

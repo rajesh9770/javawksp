@@ -2,6 +2,8 @@ package com.hackerrank;
 
 import java.util.Scanner;
 
+//DFS Connected Cell in a Grid. Find number of regions in the biggest Component
+//Another problem: find number of connected regions.
 class ConnectedRegion {
 
 	
@@ -99,6 +101,48 @@ class ConnectedRegion {
 	 * 4 4 1 1 0 0 0 1 1 0 0 0 1 0 1 0 0 0  Ans: 5
 	 * 7 5 1 1 1 0 1 0 0 1 0 0 1 1 0 1 0  0 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 Ans 9 
 	 * 	 */
-	
+
+	/**
+	 * Finds the number of connected components in the grid.
+	 * @param grid
+	 * @param n
+	 * @param m
+	 * @return
+	 */
+	private static long findNumberOfConnectedComps(int [][] grid, int n, int m){
+		long numOfConnectedComps = 0;
+		for(int i=0; i<n; ++i){
+			for(int j=0; j<m; ++j){
+				if(grid[i][j] ==1){
+					++numOfConnectedComps;
+					mark(grid, n, m, i, j);
+				}
+			}
+		}
+		return numOfConnectedComps;
+	}
+
+	/**
+	 * Marks the island that starts at (i,j)-th position as done.
+	 * @param grid
+	 * @param n
+	 * @param m
+	 * @param i
+	 * @param j
+	 */
+	private static void mark(int[][] grid, int n, int m, int i, int j) {
+		if(i>=0 && i<n && j>=0 && j<m && grid[i][j] ==1){
+			grid[i][j] = 0;
+			mark(grid, n, m, i, j+1);
+			mark(grid, n, m, i, j-1);
+			mark(grid, n, m, i+1, j);
+			mark(grid, n, m, i-1, j);
+
+			mark(grid, n, m, i-1, j+1);
+			mark(grid, n, m, i-1, j-1);
+			mark(grid, n, m, i+1, j+1);
+			mark(grid, n, m, i+1, j-1);
+		}
+	}
 
 }

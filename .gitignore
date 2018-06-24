@@ -2,8 +2,9 @@
 .idea/
 target/
 testcases/
-#data/
+data/
 src/com/hackerrank/DoNotCheckIn/
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 DS.iml

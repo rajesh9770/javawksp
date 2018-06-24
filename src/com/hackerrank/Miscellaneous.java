@@ -240,6 +240,12 @@ public class Miscellaneous {
     }
 
 
+    /**
+     *  Each of the packets contains a number of candies. Each kid gets one packet. There are more packets than kids.
+     *  Want to minimize the cumulative difference in the number of candies in the packets that are handed out.
+     *  Determine the minimum unfairness sum achievable.
+     * @param args
+     */
     public static void mainForAngry(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();

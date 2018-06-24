@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by Rajesh on 3/17/2018.
  */
-public class Solution22 {
+public class Solution1 {
 
 
     private static class WordCount{

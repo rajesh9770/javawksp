@@ -13,7 +13,9 @@ import java.util.*;
 # input = [(4,6), (1,2)] 
 # > 3 
 # input = [(1,4), (6,8), (2,4), (7,9), (10, 15)] 
-# > 11 
+# > 11
+
+Here a resource(TV) is shared among people and we are counting how long the resource is used.
 */
 
 public class Ranges {
@@ -142,7 +144,7 @@ public class Ranges {
             intervals[i] = 0;
         }
         intervals[1] += 1; //it's not interval[i] = 1, you need to add +1 to existing value, since there could be multiple people entering at the same time
-        intervals[4] -= 1; //it's not interval[i] = -1, you need to add +1 to existing value, since there could be multiple people entering at the same time
+        intervals[4] -= 1; //it's not interval[i] = -1, you need to subtract 1 to existing value, since there could be multiple people leaving at the same time
         intervals[6] += 1;
         intervals[8] -= 1;
         intervals[2] += 1;

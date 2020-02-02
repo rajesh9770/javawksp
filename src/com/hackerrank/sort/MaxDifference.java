@@ -1,7 +1,6 @@
 package com.hackerrank.sort;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Rajesh on 3/11/2018.
@@ -13,16 +12,38 @@ public class MaxDifference {
      * Given an array A[] and a number x, check for pair in A[] with sum as x
      */
 
-    public static boolean findPairWithSum(int arr[], int sum){
+    public static boolean findPairWithSum(int arr[], int sum){  //O(nln(n))
 
         int l = 0, r = arr.length-1;
-        Arrays.sort(arr);
+        Arrays.sort(arr);  //O(nln(n))
         while(l<r){
             int tmp = arr[l] + arr[r];
             if(tmp == sum) return true;
 
             if(tmp < sum) l++;
             else r--;
+        }
+        return false;
+    }
+
+    public static boolean findPairWithSum2(int arr[], int sum){  //O(n)
+
+        Map<Integer, Set<Integer>> valToIndices = new HashMap<>();
+        for(int i=0; i< arr.length; ++i){
+            Set<Integer> indices = valToIndices.get(arr[i]);
+            if(indices == null) {
+                indices = new HashSet<>();
+                valToIndices.put(arr[i], indices);
+            }
+            indices.add(i);
+        }
+        for (int i=0; i<arr.length; ++i){
+            int target = sum - arr[i];
+            Set<Integer> indices = valToIndices.get(target);
+            if (indices != null) {
+                if(indices.contains(i) && indices.size()==1) continue;
+                else return true;
+            }
         }
         return false;
     }

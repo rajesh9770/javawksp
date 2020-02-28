@@ -2,6 +2,7 @@ package com.hackerrank;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -758,5 +759,75 @@ ZZYYZZYYZZZAZZZB
             seeds[1] = sum;
         }
         System.out.println(isFibonacci(buff.toString()));
+    }
+
+    public int minDistance(String word1, String word2) {
+        char [] a1 = word1.toCharArray();
+        char [] a2 = word2.toCharArray();
+        int [] ct = new int[26];
+        for(char c: a1){
+            ct[c-'a']++;
+        }
+        for(char c: a2){
+            ct[c-'a']--;
+        }
+        int del=0;
+        for(char c: a1){
+            int a = ct[c-'a'];
+            del = del + a > 0? a : -a;
+        }
+        return del;
+    }
+
+
+    public int maxStockProfit(int[] prices) {
+        int profit = 0;
+        boolean buy = true;
+        int pricePaid = 0;
+        for (int i=0; i<prices.length; ++i) {
+            if (buy) {
+                if (i + 1 < prices.length && prices[i] < prices[i + 1]) { //buy it
+                    buy = false;
+                    pricePaid = prices[i];
+                }
+            } else {
+                if (pricePaid < prices[i]) {
+                    if (i + 1 == prices.length || prices[i] > prices[i + 1]) { //sell it
+                        buy = true;
+                        profit += (prices[i] - pricePaid);
+                    }
+                }
+            }
+        }
+        return profit;
+    }
+
+    /**
+     * Given an array A, partition it into two (contiguous) subarrays left and right so that:
+     *
+     * Every element in left is less than or equal to every element in right.
+     * left and right are non-empty.
+     * left has the smallest possible size.
+     * @param A
+     * @return
+     */
+    public int partitionDisjoint(int[] A) {
+        int [] maxR = new int[A.length];
+
+        int [] minL = new int[A.length];
+        maxR[0] = A[0];
+        for(int i=1;i<A.length; ++i){
+            maxR[i] = Math.max(maxR[i-1], A[i]);
+        }
+
+        minL[A.length-1] = A[A.length-1];
+        for(int i=A.length-2; i>=0; --i){
+            minL[i] = Math.min(minL[i+1], A[i]);
+        }
+
+        for(int i=1; i<A.length; ++i){
+            if(maxR[i-1]<=minL[i]) return i;
+        }
+        return 0;
     }
 }

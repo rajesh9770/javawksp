@@ -33,8 +33,8 @@ public class BinaryTreeLeafsLR {
                 }
                 return null;
             }else{
-                root.left = extractLeafList(root.left);
-                root.right = extractLeafList(root.right);
+                root.left = extractLeafList(root.left); //this removes left leaf node
+                root.right = extractLeafList(root.right); //this removes right leaf node
                 return root;
             }
         }

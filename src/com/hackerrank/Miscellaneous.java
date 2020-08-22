@@ -581,7 +581,7 @@ ZZYYZZYYZZZAZZZB
     }
 
     /**
-     * Weights are in ascending order.
+     * Weights are in ascending order. Bag has capacity W.
      * Only one weight of size weights[i] is available.
      * @param weights
      * @param W

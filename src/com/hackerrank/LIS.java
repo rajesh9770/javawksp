@@ -1,12 +1,23 @@
 package com.hackerrank;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * Application:
+ * You have a number of envelopes with widths and heights given as a pair of integers (w, h).
+ * One envelope can fit into another if and only if both the width and height of one envelope is greater than the width and height of the other envelope.
+ *
+ * What is the maximum number of envelopes can you Russian doll? (put one inside other)
+ *
+ * Sort the array. Ascend on width and descend on height if width are same.
+ * Find the longest increasing subsequence based on height.
+ * Since the width is increasing, we only need to consider height.
+ * 
+ */
 public class LIS {
 
     private static class Node<E extends Comparable<? super E>> implements Comparable<Node<E>>

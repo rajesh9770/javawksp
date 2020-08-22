@@ -6,6 +6,7 @@ import java.util.Stack;
 /**
  * Created by Rajesh on 11/16/2017.
  * https://www.youtube.com/watch?v=VNbkzsnllsU
+ * https://tech.pic-collage.com/algorithm-largest-area-in-histogram-84cc70500f0c
  */
 public class LargestRectangleHistogram {
 

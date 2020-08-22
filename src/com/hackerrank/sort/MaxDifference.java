@@ -1,6 +1,7 @@
 package com.hackerrank.sort;
 
 import java.util.*;
+import javafx.util.Pair;
 
 /**
  * Created by Rajesh on 3/11/2018.
@@ -106,12 +107,45 @@ public class MaxDifference {
         return indexDiff;
     }
 
+    /**
+     * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
+     * Find all unique triplets in the array which gives the sum of zero.
+     */
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i=0; i< nums.length; ++i) {
+            if (i>0 && nums[i-1] == nums[i]) continue;
+            //use findPairWithSum to find two numbers that add up to nums[i]
+            int left = i+1, right = nums.length-1;
+            while (left < right) {
+                if (nums[left] + nums[right] + nums[i] == 0)  {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    while(left < right && nums[left] == nums[left-1]) left++;
+                } else if (nums[left] + nums[right] + nums[i] < 0 ) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return result;
+    }
 
     /**
-     * Histogram Volume
+     * Total Histogram Volume. Taller bar can go over the smaller bar.
      * Find the highest bars on left and right sides.
      * Take the smaller of two heights.
      * The difference between smaller height and height of current element is the amount of water that can be stored in this array element.
+     * Think of one histogram as wide block that is 1 unit wide and a[i] tall.
+     *    _
+     *   | |  _
+     *  _| |_| |
+     * | | | | |
+     * ------------------------------
+     * Answer is 1, since only 3rd histogram can hold 1 unit of water.
      */
     public static long histogramVolume(int [] a){
         int LHigh[] = new int [a.length];
@@ -136,7 +170,7 @@ public class MaxDifference {
     }
 
     // The main function to find the maximum rectangular area under given
-    // histogram with n bars
+    // histogram with n bars. Taller bar can't go over smaller one. Smaller histogram can go through taller ones.
     public static long getMaxArea(int hist[]){
 
         Stack<Integer> stack = new Stack<>();
@@ -152,7 +186,7 @@ public class MaxDifference {
                 // with stack top as the smallest (or minimum height) bar. 'i' is
                 // 'right index' for the top and element before top in stack is 'left index'
                 int top = stack.pop();
-                //hist[top] on right bounded by i-1 (i is one over) i.e. hist[top] >= hist[i]
+                //hist[top] on right bounded by i-1 (i is one over) i.e. hist[top] >= hist[i] and hist[top] <= hist[i-1] as it is on stack
                 // and on left bounded by new top on stack (after above pop) since stack is always increasing.
                 // i.e. hist[stack.newtop] < hist[top].
                 // so rectangle hist[top] spans from stack.newtop + 1 to i-1, i.e its width is i-1-stack.newtop-1 +1
@@ -184,5 +218,27 @@ public class MaxDifference {
 
     public static void main(String[] args) {
         mainForMaxArea();
+    }
+
+
+    /**
+     * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
+     * n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0).
+     * Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+     * This problem is simpler than the above two. In this problem, both small and taller bar can lie between the two outer lines.
+     * We have to maximize the Area that can be formed between the vertical lines using the shorter line as length
+     * and the distance between the lines as the width of the rectangle forming the area.
+     */
+
+    public int maxArea(int[] height) {
+        int maxarea = 0, l = 0, r = height.length - 1;
+        while (l < r) {
+            maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
+            if (height[l] < height[r])
+                l++;
+            else
+                r--;
+        }
+        return maxarea;
     }
 }

@@ -1,5 +1,7 @@
 package com.hackerrank.stack;
 
+import javafx.util.Pair;
+
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -19,13 +21,14 @@ public class PoisonPlants {
     }
 
     static int poisonousPlants(int[] p) {
-        Stack<Data> smallerElements = new Stack<>();
+        Stack<Data> smallerElements = new Stack<>(); //descending order from top of stack to bottom.
         int days = 0;
         for(int i=0;i<p.length; ++i){
+            //we adding p[i]-th element on stack. make sure p[i] is >  top of stack; otherwise pop all higher elements
             if(smallerElements.isEmpty()){
                 smallerElements.push(new Data(p[i], -1));
             }else{
-                int leftNeighbour = smallerElements.peek().value;
+                int leftNeighbour = smallerElements.peek().value; // this will always give left neighbor, since we always add the current element on stack.
                 if(p[i] > leftNeighbour){//i-th plant dies on day 1
                     smallerElements.push(new Data(p[i], 1));
                     days = Math.max(days, 1);
@@ -57,5 +60,23 @@ public class PoisonPlants {
         int result = poisonousPlants(p);
         System.out.println(result);
         in.close();
+    }
+
+
+    //#901. Online Stock Span
+    public Stack<Pair<Integer, Integer>> stockSpan = new Stack<>(); //store price and how long past it has lower value.
+    public void StockSpanner() {
+
+    }
+
+    public int next(int price) {
+        int days =1;
+        while (!stockSpan.isEmpty() && price >= stockSpan.peek().getKey()){//keep the stack strict desc order.
+
+            days += stockSpan.pop().getValue();
+
+        }
+        stockSpan.push(new Pair<>(price, days));
+        return days;
     }
 }

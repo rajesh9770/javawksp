@@ -10,9 +10,11 @@ public class Median {
         int [] y = nums1.length < nums2.length ? nums2 : nums1;
 
         int low = 0;
-        int high = x.length;
+        int high = x.length; //high is one + the right end index (=x.length-1)
         while(low<=high){
-            int midx = (low+high)/2;
+            //low, ..... low+k-1, low+k, ....high=low+2k-1  len = 2k.
+            int midx = (low+high)/2; //gives higher of the two midpoints in case of even set of numbers, i.e. when x1, ..., x2n, it gives n+1
+
             int midy = (x.length + y.length + 1)/2 - midx;
 
             int maxx = midx>0 ? x[midx-1] : Integer.MIN_VALUE;  //max from left half
@@ -37,6 +39,13 @@ public class Median {
     }
 
     public static void main(String[] args) {
-        System.out.println(findMedianSortedArrays(new int[]{1,3}, new int[]{2}));
+        double medianSortedArrays = findMedianSortedArrays(new int[]{1}, new int[]{2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
+        System.out.println(medianSortedArrays + " "  + (medianSortedArrays == 6));
+
+        medianSortedArrays = findMedianSortedArrays(new int[0], new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
+        System.out.println(medianSortedArrays + " "  + (medianSortedArrays == 6));
+
+        medianSortedArrays = findMedianSortedArrays(new int[0], new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12, 13});
+        System.out.println(medianSortedArrays + " "  + (medianSortedArrays == 7));
     }
 }

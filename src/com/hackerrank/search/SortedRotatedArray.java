@@ -8,13 +8,13 @@ public class SortedRotatedArray {
         int mid = (right+left)/2;
         if(a[mid] == target) return mid;
 
-        if(a[left] < a[mid]) {
+        if(a[left] < a[mid]) { //left is sorted
             if( target >=a[left] && target<a[mid]){
                 return search(a, target, left, mid-1);
             }else{
                 return search(a, target, mid+1, right);
             }
-        }else if( a[mid] < a[right]) {
+        }else if( a[mid] < a[right]) { //right is sorted
             if( target <=a[right] && target>a[mid]){
                 return search(a, target, mid+1, right);
             }else{

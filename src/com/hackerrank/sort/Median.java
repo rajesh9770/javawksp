@@ -90,7 +90,7 @@ public class Median {
             }
         }
         swap(array, pivotIdx, end);
-        //all the elements to the right of pivotIdx are less than pivot
+        //all the elements to the left of pivotIdx are less than pivot
         return (pivotIdx);
     }
 

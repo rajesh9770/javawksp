@@ -5,7 +5,7 @@ public class CircularQueue<E> {
     private int start=0, end=0, size=0;
     private final int capacity;
 
-    private E[] elements;
+    private E[] elements;  //  Start -> * * * * * *-> end
 
     public CircularQueue(final int maxsize){
         this.capacity = maxsize;

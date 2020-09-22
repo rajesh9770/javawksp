@@ -67,11 +67,11 @@ public class CoinChangeMinimumCoins {
 
     Numbers whose sum of squares are equal to 12.
 
-            12+12+12+12+12+12+12+12+12+12+12+12 = 12
+            1^2+1^2+1^2+1^2+1^2+1^2+1^2+1^2+1^2+1^2+1^2+1^2 = 12
 
-            22+22+22 = 12
+            2^2+2^2+2^2 = 12
 
-            32+12+12+12 = 12
+            3^2+1^2+1^2+1^2 = 12
 
      Answer: 3 numbers (2,2,2)
      Integer part of square root of 12 is : 3. So 1,2,3 are the numbers whose square sum can be made to 12.

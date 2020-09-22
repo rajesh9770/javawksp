@@ -10,7 +10,7 @@ import java.util.Stack;
  */
 public class LargestRectangleHistogram {
 
-    static long largestRectangle1(int[] h){
+static long largestRectangle1(int[] h){//O(n^2)
         int max = 0;
         int start =0;
         int end =0;
@@ -88,8 +88,8 @@ public class LargestRectangleHistogram {
         in.close();
     }
 
-    //also see MaxDifference in sort package
-    // histogram with n bars
+    //also see MaxDifference.getMaxArea in sort package. That is same as this one.
+    //histogram with n bars
     static int getMaxArea(int hist[], int n)
     {
         // Create an empty stack. The stack holds indexes of hist[] array

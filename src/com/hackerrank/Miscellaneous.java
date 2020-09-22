@@ -14,6 +14,34 @@ public class Miscellaneous {
         // TODO Auto-generated constructor stub
     }
 
+    /**
+     * Find the suqareroot of a number rounded down
+     * 3 -> 1
+     * 4 -> 2
+     * 5 -> 2
+     * 3 -> 2
+     * @param input
+     * @return
+     */
+    public static int sqrt(int input){
+        int low = 1, high = input;
+        //set initial low and high wisely. For example if input = 2^15, we know sqrt lies between 2^7 and 2^8.
+        while(low<high){
+            int mid = (low+high)/2;
+            if (mid*mid == input){
+                return mid;
+            }else if (mid*mid < input){
+                if((mid+1)*(mid+1) <input)  low = mid+1;
+                else return mid;
+            } else{
+                if((mid-1)*(mid-1) >input)  high = mid-1;
+                else return mid;
+            }
+        }
+        return low;
+    }
+
+
     public static BigInteger choose(int n, int k) {
         BigInteger r = BigInteger.valueOf(1);
         long d;
@@ -748,6 +776,10 @@ ZZYYZZYYZZZAZZZB
     }
 
     public static void main(String[] args) {
+        //System.out.println(sqrt(9));
+        //System.out.println(sqrt(5));
+        System.out.println(sqrt(7));
+        if(true) return;
         StringBuilder buff=new StringBuilder();
         long seeds[] = {12, 23};
         buff.append(seeds[0]).append(seeds[1]);

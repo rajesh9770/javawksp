@@ -111,6 +111,44 @@ public class Dijstra1 {
         }
     }
 
+    public static void practice(){
+
+        int s =0;//Giben
+        int [] costs = new int[10];
+        boolean [] visited = new boolean[10];
+        costs[s] = 0;
+        visited[s] = true; //set it true after we explored all the neighbors
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+
+        Map<Integer, Integer> adjacentList = adjacentLists[s];
+        for(Map.Entry<Integer, Integer> edge : adjacentList.entrySet()){
+            q.add(new Edge(edge.getKey(), edge.getValue()));
+        }
+
+        while(!q.isEmpty()){
+
+            Edge next = q.poll();
+            costs[next.node] = next.r;
+            Map<Integer, Integer> newAdditions = adjacentLists[next.node];
+            for(Map.Entry<Integer, Integer> newEdge : newAdditions.entrySet()){
+                if(!visited[newEdge.getKey()]){
+                    //find this edge in queue
+                    Edge edge = null;
+                    Iterator<Edge> iterator = q.iterator();
+                    while(iterator.hasNext()){
+                        if(iterator.next().node == newEdge.getKey()){
+                            edge = iterator.next();
+                            iterator.remove();
+                            break;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+    }
 
     private static class InputReader {
         private InputStream stream;

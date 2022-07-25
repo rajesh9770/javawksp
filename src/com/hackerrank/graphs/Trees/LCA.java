@@ -35,7 +35,7 @@ public class LCA {
 
     public static Result helper(Node root, Node p, Node q){
         if(root == null) return new Result(null, false);
-        if(root.equals(p) && root.equals(q)) return new Result(root, true);
+        if(root.equals(p) && root.equals(q)) return new Result(root, true); //if both nodes are equal to the root, then it's the root
 
         Result left = helper(root.left, p, q);
         if(left.isAncestor) return left;
@@ -52,7 +52,6 @@ public class LCA {
             }else{//else return the non null result.
                 return left.result != null ? left : right;
             }
-
         }else{
             return new Result(null, false);
         }

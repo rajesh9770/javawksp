@@ -10,6 +10,9 @@ public class Trie<T> {
 
     private TrieNode<T> root;
 
+    public Trie(){
+        root = new TrieNode<T>();
+    }
     public Trie(List<T[]> list)
     {
         root = new TrieNode<T>();
@@ -24,6 +27,10 @@ public class Trie<T> {
         for (T[] word : list) {
             root.addWord(word, 0);
         }
+    }
+
+    public void addWord(T[] word){
+        root.addWord(word, 0);
     }
 
     public int contains(T[] prefix, boolean exact)

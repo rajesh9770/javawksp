@@ -26,7 +26,7 @@ public class LottoryNumbers {
             String ticketsItem = scanner.nextLine();
             binary = binaryEquivalent(ticketsItem);
             System.out.println( ticketsItem + " " + binary);
-            frequency[binary] = frequency[binary] + 1l;
+            frequency[binary] = frequency[binary] + 1L;
         }
         for (int i = 0; i < 1023; i++) {
             if(frequency[i]==0)

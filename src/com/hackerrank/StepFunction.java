@@ -8,8 +8,8 @@ import java.util.Scanner;
  * You have to perform  operations on the list and output the maximum of final values of all the  elements in the list. 
  * For every operation, you are given three integers ,  and  and you have to add value  to all the elements ranging from index  to 
  * (both inclusive).
- * First line will contain two integers  and  separated by a single space.
-Next  lines will contain three integers ,  and  separated by a single space.
+ * First line will contain two integers n  and m separated by a single space.
+Next m lines will contain three integers  a, b  and c separated by a single space.
 Numbers in list are numbered from   1 to n .
 5 3
 1 2 100

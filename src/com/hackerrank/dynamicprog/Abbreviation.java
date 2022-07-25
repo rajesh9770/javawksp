@@ -7,9 +7,9 @@ import java.util.Scanner;
  */
 
 /**
- * You can perform the following operation on some string,
-    1. Capitalize zero or more of 's lowercase letters at some index i (i.e., make them uppercase).
-    2. Delete all of the remaining lowercase letters in .
+ * You can perform the following operation on some string, a.
+    1. Capitalize zero or more of a's lowercase letters at some index i (i.e., make them uppercase).
+    2. Delete all of the remaining lowercase letters in a.
     For two strings a and b, determine if it's possible to make a equal to b by performing the above operation on.
     aBbDdB and BBD  Ans: NO
     aBbDd and BBD  Ans: YES

@@ -12,16 +12,22 @@ public class Miscellaneous {
       TreeNode right;
       TreeNode(int x) { val = x; }
     }
-    static Integer res = Integer.MAX_VALUE, pre = null;
+    static Integer res = Integer.MAX_VALUE;
 
     public static int minDiffInBST(TreeNode root) {
         //Integer res = Integer.MAX_VALUE, pre = null;
+        if (root == null) return res;
+        if (root.left != null) {
+            res = Math.min(res, root.val - root.left.val);
+            res = minDiffInBST(root.left);
+        }
 
-            if (root.left != null) minDiffInBST(root.left);
-            if (pre != null) res = Math.min(res, root.val - pre);
-            pre = root.val;
-            if (root.right != null) minDiffInBST(root.right);
-            return res;
+        if (root.right != null) {
+            res = Math.min(res, root.right.val - root.val);
+            res = minDiffInBST(root.right);
+        }
+        return res;
+
     }
 
     public static void driverMinDiffBST(){
@@ -34,7 +40,28 @@ public class Miscellaneous {
         System.out.println(minDiffInBST(bstRoot) == 1);
     }
 
+
+
+
     public static void main(String[] args) {
-        driverMinDiffBST();
+//        driverMinDiffBST();
+
     }
+
+
+    /**
+     * Given -
+     * 2 sorted integer arrays A (size n) and B (size m)
+     * 2 integers x and k
+     *
+     * Write a function k_closest(A, B, x, k) that returns k integers closest to x across the 2 sorted arrays.
+     *
+     * Example:
+     * A = [1,5,7,9]
+     * B = [2,8,16]
+     * x = 5
+     * k = 4
+     *
+     * output = [2,5,7,8]
+     */
 }

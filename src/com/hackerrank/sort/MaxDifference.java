@@ -49,6 +49,33 @@ public class MaxDifference {
         return false;
     }
 
+    //Given a list of n integers arr[0..(n-1)], determine the number of different pairs of elements within it which sum to k.
+    public static int numberOfWays(int[] arr, int k) {
+        // Write your code here
+        Map<Integer, Integer> nums = new HashMap<>();
+        for(int a: arr){
+            if(nums.containsKey(a)){
+                Integer ct = nums.get(a);
+                nums.put(a, ct+1);
+            }else{
+                nums.put(a, 1);
+            }
+        }
+        int ret = 0;
+        // iterate through each element and increment the
+        // count (Notice that every pair is counted twice)
+        for(int a: nums.keySet()){
+            if(nums.containsKey(k-a)){
+                Integer ct = nums.get(k - a);
+                if(k-a == a){
+                    ret += (ct*(ct-1));
+                }else{
+                    ret += ct * nums.get(a);
+                }
+            }
+        }
+        return ret/2;
+    }
     /**
      * Given an unsorted array and a number n, find if there exists a pair of elements in the array whose difference is n.
      *
@@ -134,6 +161,29 @@ public class MaxDifference {
         return result;
     }
 
+
+    /**
+     * Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
+     */
+
+    public static int findMaxSumSubArray(int k, int[] arr) {
+        if(arr.length>k){
+            int currMaxSum = 0;
+            for (int i=0; i<k; ++i) {
+                currMaxSum += arr[i];
+            }
+            int currSum = currMaxSum;
+            for(int i=k; i<arr.length; ++i){
+                currSum = currSum + arr[i] - arr[i-k];
+                if(currSum > currMaxSum){
+                    currMaxSum = currSum;
+                }
+            }
+            return currMaxSum;
+        }
+        return -1;
+    }
+
     /**
      * Total Histogram Volume. Taller bar can go over the smaller bar.
      * Find the highest bars on left and right sides.
@@ -178,10 +228,12 @@ public class MaxDifference {
         long maxArea = 0;
 
         while(i<hist.length){
-            if(stack.isEmpty() || hist[stack.peek()] < hist[i]){ //stack is always increasing
+            if(stack.isEmpty() || hist[stack.peek()] < hist[i]){ //stack is always strictly increasing
                 stack.push(i);
                 ++i;
             }else{
+                //When we push the element on stack, we pop all elements that are >= that element to make a space for it.
+                //So all the elements between two stack indices j and j+1 are >= the element at index j+1.
                 // If this bar is lower than top of stack, then calculate area of rectangle
                 // with stack top as the smallest (or minimum height) bar. 'i' is
                 // 'right index' for the top and element before top in stack is 'left index'
@@ -189,6 +241,7 @@ public class MaxDifference {
                 //hist[top] on right bounded by i-1 (i is one over) i.e. hist[top] >= hist[i] and hist[top] <= hist[i-1] as it is on stack
                 // and on left bounded by new top on stack (after above pop) since stack is always increasing.
                 // i.e. hist[stack.newtop] < hist[top].
+                // Since we pop when we see a smaller element implies that all elements from [stack.newtop+1 .... top] are of the height > top.
                 // so rectangle hist[top] spans from stack.newtop + 1 to i-1, i.e its width is i-1-stack.newtop-1 +1
                 // -----------------------------------*---------------*---------
                 //             stack.newtop  stack.newtop+1          i-1   i
@@ -214,10 +267,12 @@ public class MaxDifference {
         // and has more area than 1*5 or 4*2 or 5*1
         System.out.println("Maximum area is " + getMaxArea(new int[]{1, 2, 3, 4, 5}));
         System.out.println("Maximum area is " + getMaxArea(new int[]{1, 2, 3, 4, 5, 1000}));
+        System.out.println("Maximum area is " + getMaxArea(new int[]{2,2,2,2}));
     }
 
     public static void main(String[] args) {
         mainForMaxArea();
+        //System.out.println(numberOfWays(new int[] {1,2,2,4,4,4}, 6));
     }
 
 

@@ -7,6 +7,7 @@ public class Utils {
 
     /**
      * returns an index such that all elements to the right of index are <= arr[index]
+     *
      * @param array
      * @param begin
      * @param end
@@ -18,9 +19,10 @@ public class Utils {
 
         E pivot = array[pivotIdx];
         swap(array, pivotIdx, end);//move pivot at end
-        for (int i = pivotIdx = begin; i < end; ++i) {
+        pivotIdx = begin;
+        for (int i = begin; i < end; ++i) {
             if (array[i].compareTo(pivot) <= 0) {
-                if(pivotIdx != i) swap(array, pivotIdx, i);
+                if (pivotIdx != i) swap(array, pivotIdx, i);
                 ++pivotIdx;
             }
         }
@@ -28,9 +30,17 @@ public class Utils {
         return (pivotIdx);
     }
 
-    public static <E> void swap(E[] arr, int a, int b){
+    public static <E> void swap(E[] arr, int a, int b) {
         E temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
+    }
+
+    public static <E extends Comparable<? super E>> void qsort(E[] array, int begin, int end) {
+        if (end > begin) {
+            int index = partition(array, begin, end, begin);
+            qsort(array, begin, index - 1);
+            qsort(array, index + 1, end);
+        }
     }
 }

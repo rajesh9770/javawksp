@@ -105,6 +105,20 @@ public class LRU<K,V> {
     }
 
     public static void main(String[] args) {
+
+        StringBuilder buff = new StringBuilder();
+        buff.append("TEST_");
+        int len = buff.length();
+
+        buff.setLength(len);
+        buff.append("key1");
+        System.out.println(buff);
+
+        buff.setLength(len);
+        buff.append("key2");
+        System.out.println(buff);
+        if(true) return;
+
         LRU<Integer, Integer> cache = new LRU<>(2);
         cache.put(1, 1);
         //cache.print();

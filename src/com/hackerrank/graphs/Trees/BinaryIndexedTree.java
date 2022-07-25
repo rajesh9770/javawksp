@@ -16,7 +16,7 @@ package com.hackerrank.graphs.Trees;
 
 /**
  * idx in fTree|covers|     steps to get cumulative sum
- * 0            0
+ * 0            0 ----IGINORED------
  * 1            1           1, 0  -> (node, parent node)
  * 2            1-2         2, 0
  * 3            3           3, 2
@@ -61,8 +61,8 @@ package com.hackerrank.graphs.Trees;
  */
 public class BinaryIndexedTree {
     int MaxIdx = 100; //maximum index that can have non-zero index
-    int [] cards = new int[MaxIdx+1];
-    int [] fTree = new int[MaxIdx+1];
+    int [] cards = new int[MaxIdx+1]; // 1- based
+    int [] fTree = new int[MaxIdx+1]; //1 -based
 
     static int getHighestBitNumber(int n)
     {
@@ -162,6 +162,13 @@ public class BinaryIndexedTree {
 
     }
 
+    /**
+     * Given a sequence of N integers in the range [0,M), find the sum of medians of N-K+1 contiguous subsequences of length K. (1<=N<=250,000; 1<=K<=1000, M=65536).
+     * @param nums
+     * @param N
+     * @param K
+     * @return
+     */
     long sumOfMedians(int[] nums, int N, int K) {
         int mid = (K+1)/2;
         long sum = 0;

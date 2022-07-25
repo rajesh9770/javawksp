@@ -31,7 +31,7 @@ public class BinaryTreeLeafsLR {
                     root.left = prev;
                     prev = root;
                 }
-                return null;
+                return null;// return null, so it is removed from the tree
             }else{
                 root.left = extractLeafList(root.left); //this removes left leaf node
                 root.right = extractLeafList(root.right); //this removes right leaf node

@@ -65,8 +65,9 @@ public class CreateMaxNumber {
         int n = nums.length;
         int len = 0; //current stack length
         for (int i = 0; i < n; i++) {
-            //if # of remaining elements (n-i) is more that space left on stack (k-len) and the new element is greater than top of stack, then pop the stack
-            while (len > 0 && len + n - i > k && nums[i] > result[len - 1]) {
+            //if # of remaining elements counting current one, (n-1-i+1)=n-i is more or equal than space left on stack after removing current element (k-len-1)
+            // and the new element is greater than top of stack, then pop the stack
+            while (len > 0 && n - i >= k-len+1 && nums[i] > result[len - 1]) {
                 len--;
             }
 

@@ -1,7 +1,9 @@
 package com.hackerrank.stack;
 
 import javafx.util.Pair;
+import sun.jvm.hotspot.utilities.Assert;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -21,7 +23,7 @@ public class PoisonPlants {
     }
 
     static int poisonousPlants(int[] p) {
-        Stack<Data> smallerElements = new Stack<>(); //descending order from top of stack to bottom.
+        Stack<Data> smallerElements = new Stack<>(); //ascending order from bottom of stack to top.
         int days = 0;
         for(int i=0;i<p.length; ++i){
             //we adding p[i]-th element on stack. make sure p[i] is >  top of stack; otherwise pop all higher elements
@@ -29,7 +31,7 @@ public class PoisonPlants {
                 smallerElements.push(new Data(p[i], -1));
             }else{
                 int leftNeighbour = smallerElements.peek().value; // this will always give left neighbor, since we always add the current element on stack.
-                if(p[i] > leftNeighbour){//i-th plant dies on day 1
+                if(p[i] > leftNeighbour){//i-th plant dies on day 1 - plant dies if it's fertiliser is more than it's left
                     smallerElements.push(new Data(p[i], 1));
                     days = Math.max(days, 1);
                 }else{
@@ -51,32 +53,56 @@ public class PoisonPlants {
     }
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int[] p = new int[n];
-        for(int p_i = 0; p_i < n; p_i++){
-            p[p_i] = in.nextInt();
-        }
-        int result = poisonousPlants(p);
-        System.out.println(result);
-        in.close();
+//        Scanner in = new Scanner(System.in);
+//        int n = in.nextInt();
+//        int[] p = new int[n];
+//        for(int p_i = 0; p_i < n; p_i++){
+//            p[p_i] = in.nextInt();
+//        }
+//        int result = poisonousPlants(p);
+//        System.out.println(result);
+//        in.close();
+        System.out.println(Arrays.equals(StockSpanner(new int[] {100, 80, 60, 70, 60, 75, 85}), (new int[]{1, 1, 1, 2, 1, 4, 6})));
+
     }
 
 
     //#901. Online Stock Span
+    /**
+     * The span of the stock's price today is defined as the maximum number of consecutive days (starting from today and going backwards)
+     * for which the price of the stock was less than or equal to today's price.
+     * See com.hackerrank.stack.ContiguousMaxSubArray.countSubarrays
+     */
     public Stack<Pair<Integer, Integer>> stockSpan = new Stack<>(); //store price and how long past it has lower value.
-    public void StockSpanner() {
+    public static int[] StockSpanner(int [] stockPrices) {
 
-    }
+        int i = 0;
+        Stack<Integer> stockSpan = new Stack<>();
+        int [] span = new int[stockPrices.length];
+        for(int k=0; k<span.length; ++k) span[k] = 0;
 
-    public int next(int price) {
-        int days =1;
-        while (!stockSpan.isEmpty() && price >= stockSpan.peek().getKey()){//keep the stack strict desc order.
-
-            days += stockSpan.pop().getValue();
-
+        while(i<stockPrices.length) {
+            if(stockSpan.isEmpty() || stockPrices[i] < stockPrices[stockSpan.peek()]) {
+                stockSpan.push(i);
+                ++i;
+            }else{
+                int top = stockSpan.pop();
+                span[i] += (span[top] +1);
+            }
         }
-        stockSpan.push(new Pair<>(price, days));
-        return days;
+        for(int k=0; k<span.length; ++k) span[k] +=1;
+        System.out.println(Arrays.toString(span));
+        return span;
     }
+
+//    public int next(int price) {
+//        int days =1;
+//        while (!stockSpan.isEmpty() && price >= stockSpan.peek().getKey()){//keep the stack strict desc order.
+//
+//            days += stockSpan.pop().getValue();
+//
+//        }
+//        stockSpan.push(new Pair<>(price, days));
+//        return days;
+//    }
 }

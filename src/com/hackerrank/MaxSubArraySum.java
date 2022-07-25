@@ -9,18 +9,19 @@ import java.util.TreeSet;
 public class MaxSubArraySum {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int testcases = in.nextInt();
-        while(testcases-->0){
-            int arraySize = in.nextInt();
-            long mod = in.nextLong();
-            long[] arr = new long[arraySize];
-            for(int i=0; i<arraySize; ++i){
-                arr[i] = in.nextLong() %mod;
-            }
-            System.out.println(solve(arr, arraySize, mod));
-        }
-        in.close();
+//        Scanner in = new Scanner(System.in);
+//        int testcases = in.nextInt();
+//        while(testcases-->0){
+//            int arraySize = in.nextInt();
+//            long mod = in.nextLong();
+//            long[] arr = new long[arraySize];
+//            for(int i=0; i<arraySize; ++i){
+//                arr[i] = in.nextLong() %mod;
+//            }
+//            System.out.println(solve(arr, arraySize, mod));
+//        }
+//        in.close();
+        System.out.println(solve(new long[]{1, -12, 0, 0,0 }, 1, 10));
 
     }
 
@@ -32,6 +33,7 @@ public class MaxSubArraySum {
         for(long i: arr){
             partialSum += i;
             partialSum %= mod;
+            if (partialSum <0) partialSum = (partialSum + mod) % mod    ;
             set.add(partialSum);
             max = Math.max(max, partialSum);
             Long ceiling = set.higher(partialSum);

@@ -37,6 +37,14 @@ public class MinHeap {
         System.out.println(defaultHeap.poll());
         System.out.println(defaultHeap.poll());
 
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
 
+        maxHeap.add(10);
+        maxHeap.add(8);
+        maxHeap.add(20);
+
+        System.out.println(maxHeap.poll());
+        System.out.println(maxHeap.poll());
+        System.out.println(maxHeap.poll());
     }
 }

@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Given a sentence and a set of characters. Find the minimum window within which the set of characters can be found in the sentence in any order.
  * http://coding-interview-archives.blogspot.com/2013/09/find-minimum-window-in-string.html
+ * See com.hackerrank.strings.ExactBroadBestMatch
  */
 public class MinWindowAllChars {
 
@@ -65,8 +66,59 @@ public class MinWindowAllChars {
 
 
     public static void main(String[] args) {
+//        System.out.println(~5);
+//        System.out.println(Integer.toBinaryString(~0));
+//        if(true) return;
         String str = "this is a tis test string";
-        String tar = "tis";
-        findWindow(str.toCharArray(), tar.toCharArray());
+        String tar = "tisa";
+        System.out.println(findWindow(str.toCharArray(), tar.toCharArray()));
+
+        str = "bbbaaaa bc aaaa c";
+        tar = "bc";
+        System.out.println(findWindow(str.toCharArray(), tar.toCharArray()));
+    }
+
+
+    /**
+     * You are given two strings s and t. You can select any substring of string s and rearrange the characters of the selected substring.
+     * Determine the minimum length of the substring of s such that string t is a substring of the selected substring.
+     */
+    public static int minLengthSubstring(String s, String t){
+        Map<Character, Integer> desiredFreq = new HashMap<>();
+        Map<Character, Integer> currFreq = new HashMap<>();
+
+        for(char c: t.toCharArray()){
+            Integer count = desiredFreq.getOrDefault(c, new Integer(0));
+            desiredFreq.put(c, ++count);
+        }
+
+        int left = 0;
+        int matchedCount = 0;
+        int min = Integer.MAX_VALUE;
+        for(int i=0; i< s.length(); ++i){
+            char c = s.charAt(i);
+            if(!desiredFreq.containsKey(c)) continue;
+
+            Integer ct = currFreq.getOrDefault(c, new Integer(0));
+            currFreq.put(c, ++ct);
+            if(currFreq.get(c)<= desiredFreq.get(c)){
+                matchedCount++;
+            }
+            if(t.length() == matchedCount){
+                char lc = s.charAt(left);
+                while(!desiredFreq.containsKey(lc)
+                        || desiredFreq.get(lc)< currFreq.get(lc)){
+
+                    if(desiredFreq.containsKey(lc)
+                            && desiredFreq.get(lc)< currFreq.get(lc)){
+                        Integer cc = currFreq.get(lc);
+                        currFreq.put(lc, --cc);
+                    }
+                    ++left;
+                }
+                if(i-left+1 < min) min = i-left+1;
+            }
+        }
+        return min == Integer.MAX_VALUE ?  -1: min;
     }
 }

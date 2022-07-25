@@ -1,5 +1,6 @@
 package com.hackerrank.strings;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -60,6 +61,12 @@ public class NextPermutation {
 
 
     public static void main(String[] args) {
+//        Character[] chars = new Character[] {'a', 'c', 'd', 'b'};
+//        Character[] characters = nextPermutation(chars);
+//        System.out.println(Arrays.toString(characters));
+//        //ABCD ABDC ACBD ACDB ADBC ADCB BACD BADC BCAD BCDA BDAC BDCA<br>
+//        //CABD CADB CBAD CBDA CDAB CDBA DABC DACB DBAC DBCA DCAB DCBA
+//        if(true) return;
         Scanner scan = new Scanner(System.in);
         int i = scan.nextInt();
         while(i-->0){

@@ -6,7 +6,9 @@ package com.hackerrank.dynamicprog;
  * (The value of k may range from 1 to f.)
  * 1) It Breaks
  * 2) It doesn’t Break
- * The first possibility suggests that all the floors above the floor k breaks the egg. So none of them are threshold but the ones below the floor k including floor k are possible candidates. stating that now we have e-1 number of eggs and k-1 number of floors to check. Hence, to look at the eggDrop(e-1,k-1).
+ * The first possibility suggests that all the floors above the floor k breaks the egg.
+ * So none of them are threshold but the ones below the floor k including floor k are possible candidates.
+ * stating that now we have e-1 number of eggs and k-1 number of floors to check. Hence, to look at the eggDrop(e-1,k-1).
  * On the other hand, the second suggests that that the floors below the floor k also do not break the egg and are not threshold floors and floors above the floor k are the possible candidates. stating that we still have e number of eggs and f-k (total floors -the floor k) number of floors to check. Hence, to look at eggDrop(e,f-k).
  * Now, From these two possibilities we have to select the maximum one since we have to select the worst case
  * therefore, max( eggDrop(e-1,k-1) , eggDrop(e,f-k) )

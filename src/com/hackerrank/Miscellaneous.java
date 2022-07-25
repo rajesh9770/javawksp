@@ -1,10 +1,7 @@
 package com.hackerrank;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  */
@@ -40,6 +37,17 @@ public class Miscellaneous {
         }
         return low;
     }
+
+    public static int maxCoins(int[] piles) {
+        Arrays.sort(piles);
+        int n = piles.length/3;
+        int ret = 0;
+        for(int i=n; i< piles.length; i+=2){
+            ret += piles[i];
+        }
+        return ret;
+    }
+
 
 
     public static BigInteger choose(int n, int k) {
@@ -249,6 +257,16 @@ public class Miscellaneous {
         }
     }
 
+    /**
+     * Stock Profit
+     * Stock Profit
+     * Your algorithms have become so good at predicting the market that you now know what the share price of Wooden Orange Toothpicks Inc.
+     * (WOT) will be for the next number of days.
+     *
+     * Each day, you can either buy one share of WOT, sell any number of shares of WOT that you own, or not make any transaction at all.
+     * What is the maximum profit you can obtain with an optimum trading strategy?
+     * @param args
+     */
     public static void mainForStockPrice(String[] args) {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
@@ -304,7 +322,7 @@ public class Miscellaneous {
         long multiplier = k-1;
         for(int i=k ; i<arr.length; ++i){
             //int lowerIndex = i-k+1;
-            fairNess = fairNess - 2l*(sum[i-1] - sum[i-k]);
+            fairNess = fairNess - 2L*(sum[i-1] - sum[i-k]);
             fairNess = fairNess + multiplier*arr[i-k];
             fairNess = fairNess + multiplier*arr[i];
             minfairNess = Math.min(minfairNess, fairNess);
@@ -561,6 +579,12 @@ ZZYYZZYYZZZAZZZB
         in.close();
     }
 
+    /**
+     * count consecutive subsequences whose sum is divisible by k
+     * @param arr
+     * @param k
+     * @return
+     */
     public static long countContiguousSubSequence(int [] arr, int k) {
 
         int [] mods = new int[k];
@@ -593,6 +617,15 @@ ZZYYZZYYZZZAZZZB
         in.close();
     }
 
+    /**
+     * Given an array of integers and a target sum, determine the sum nearest to but not exceeding the target that can be created.
+     * To create the sum, use any element of your array zero or more times.
+     *
+     * For example, if  arr = [2,3,4] and your target sum is 10, you might select [2,2,2,2,2], [2,2,3,3] or [3,3,4]. In this case, you can arrive at exactly the target.
+     * @param weights
+     * @param W
+     * @return
+     */
     public static long UnboundedKnapsack(int [] weights, int W) {
         Arrays.sort(weights);
         long [] wg = new long [W+1];
@@ -775,10 +808,12 @@ ZZYYZZYYZZZAZZZB
         return false;
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         //System.out.println(sqrt(9));
         //System.out.println(sqrt(5));
-        System.out.println(sqrt(7));
+        //System.out.println(sqrt(7));
+        //System.out.println( maxCoins(new int[] {2,4,1,2,7,8} ));
+
         if(true) return;
         StringBuilder buff=new StringBuilder();
         long seeds[] = {12, 23};
@@ -861,5 +896,62 @@ ZZYYZZYYZZZAZZZB
             if(maxR[i-1]<=minL[i]) return i;
         }
         return 0;
+    }
+
+    /**
+     * Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most 1 element.
+     *
+     * We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based) such that (0 <= i <= n - 2).
+     */
+
+    public boolean checkPossibility(int[] nums) {
+        int prev = nums[0];
+        int dips = 0;
+        for (int i=1; i<nums.length; ++i) {
+            if ( prev > nums[i]) {
+                ++dips;
+                if(dips>1) return false;
+                if ( i-2>=0 || nums[i-2] > nums[i]) continue; // case where you raise a[i], so a[i] = a[i-1], prev stays the same
+                //else you lower a[i-1], a[i-1] = a[i]
+            }
+            prev = nums[i];
+        }
+        return true;
+    }
+
+    /**
+    One simple way to encrypt a string is to "rotate" every alphanumeric character by a certain amount. Rotating a character means replacing it with another character that is a certain number of steps away in normal alphabetic or numerical order.
+    For example, if the string "Zebra-493?" is rotated 3 places, the resulting string is "Cheud-726?". Every alphabetic character is replaced with the character 3 letters higher (wrapping around from Z to A), and every numeric character replaced with the character 3 digits higher (wrapping around from 9 to 0). Note that the non-alphanumeric characters remain unchanged.
+    **/
+    static String rotationalCipher(String input, int rotationFactor) {
+        // Write your code here
+        StringBuilder buff = new StringBuilder();
+        for(char c: input.toCharArray()){
+            if (c>='A' && c<='Z'){
+                int C = ((c - 'A') + rotationFactor) % 26 + 'A';
+                buff.append((char)C);
+            }else if (c>='a' && c<='z'){
+                int C = ((c - 'a') + rotationFactor) % 26 + 'a';
+                buff.append((char)C);
+            }else if (c>='0' && c<='9'){
+                int C = ((c - '0') + rotationFactor) % 10 + '0';
+                buff.append((char)C);
+            } else {
+                buff.append(c);
+            }
+        }
+        return buff.toString();
+    }
+
+
+
+    public static void main(String[] args) {
+        //System.out.println(rotationalCipher("Zebra-493?", 3));
+        double d1 = 10.0;
+        Double d2 = 20.0;
+        Double d3 = new Double(30.0);
+        double d4 = new Double(40.0);
+
+        System.out.println(d1 + d2 + d3.doubleValue() + d4);
     }
 }

@@ -1,9 +1,42 @@
 package com.hackerrank.dynamicprog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LongestCommonSubString {
 
-    public static int[][] lcs(String s1, String s2) {
-        return null;
+    public static int lcsubstring(String s1, String s2) {
+        int m = s1.length();
+        int n = s2.length();
+        int LCStuff[][] = new int[m + 1][n + 1];
+
+        // To store length of the longest
+        // common substring
+        int result = 0;
+
+        List<String> candidates = new ArrayList<>();
+
+        // LCSuff[m+1][n+1] in bottom up fashion
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0) {
+                    LCStuff[i][j] = 0;
+                } else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    LCStuff[i][j] = LCStuff[i - 1][j - 1] + 1;
+                    result = Integer.max(result,  LCStuff[i][j]);
+                    candidates.add(s1.substring(i-LCStuff[i][j], i));
+                } else {
+                    LCStuff[i][j] = 0;
+                }
+            }
+        }
+        for (String candidate : candidates) {
+            if(candidate.length() == result){
+                System.out.println(candidate);
+            }
+        }
+
+        return result;
     }
 
     //find the longest palindromic substring
@@ -49,7 +82,10 @@ public class LongestCommonSubString {
     }
 
     public static void main(String[] args) {
-        lcp("abcba"); //ans: abcba
+        //lcp("abcba"); //ans: abcba
+        String X = "OldSite:GeeksforGeeks.orgAAYYYYYYYYYY";
+        String Y = "NewSite:GeeksAAYYYYYYYYYYQuiz.com";
+        lcsubstring(X, Y);
     }
 
 

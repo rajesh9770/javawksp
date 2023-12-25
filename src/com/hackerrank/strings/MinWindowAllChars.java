@@ -10,6 +10,7 @@ import java.util.*;
  * Given a sentence and a set of characters. Find the minimum window within which the set of characters can be found in the sentence in any order.
  * http://coding-interview-archives.blogspot.com/2013/09/find-minimum-window-in-string.html
  * See com.hackerrank.strings.ExactBroadBestMatch
+ * https://leetcode.com/problems/minimum-window-substring/
  */
 public class MinWindowAllChars {
 
@@ -70,8 +71,8 @@ public class MinWindowAllChars {
 //        System.out.println(Integer.toBinaryString(~0));
 //        if(true) return;
         String str = "this is a tis test string";
-        String tar = "tisa";
-        System.out.println(findWindow(str.toCharArray(), tar.toCharArray()));
+        String tar = "tisat";
+        System.out.println("\nAns : " + findWindow(str.toCharArray(), tar.toCharArray()));
 
         str = "bbbaaaa bc aaaa c";
         tar = "bc";

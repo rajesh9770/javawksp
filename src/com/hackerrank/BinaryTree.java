@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.Stack;
 import java.util.function.Consumer;
 
-import com.hackerrank.BinaryTree.Node;
-
 public class BinaryTree<T> {
 
     public static class Node<T>{
@@ -60,9 +58,11 @@ public class BinaryTree<T> {
             Node<T> tmp = node;
             while(tmp!=null){
                 parents.push(tmp);
-                if(tmp.left != null)
+                if(tmp.left != null) {
                     tmp = tmp.left;
-                else tmp = tmp.right;
+                } else {
+                    tmp = tmp.right;
+                }
             }
             return parents.peek();
         }
@@ -91,7 +91,88 @@ public class BinaryTree<T> {
         }
 
     }
-    
+
+    public class inorderTraverseIterator implements Iterator<Node<T>> {
+        private Stack<Node<T>> parents;
+
+        //An iterator would start with the leftmost node
+        public inorderTraverseIterator(){
+            parents = new Stack<>();
+            getLeftMostNode(root, parents);
+        }
+
+        /**
+         * Inorder is easier than postorder. Just get the left most node (NOT leaf)
+         * @param node
+         * @param parents
+         * @return
+         */
+        public Node<T> getLeftMostNode(Node<T> node, Stack<Node<T>> parents){
+            if(node ==null) return null;
+            Node<T> tmp = node;
+            while(tmp!=null){
+                parents.push(tmp);
+                tmp = tmp.left;
+            }
+            return parents.peek();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !parents.empty();
+        }
+
+        @Override
+        public Node<T> next() {
+            Node current = parents.pop();
+
+            if (current.right != null)
+                getLeftMostNode(current.right, parents);
+
+            return current;
+        }
+    }
+
+
+    public class preorderTraverseIterator implements Iterator<Node<T>> {
+        private Stack<Node<T>> parents;
+
+        //An iterator would start at root
+        public preorderTraverseIterator(){
+            parents = new Stack<>();
+            parents.push(root);
+        }
+
+
+
+        @Override
+        public boolean hasNext() {
+            return !parents.empty();
+        }
+
+        /**
+         * Pop one. Do following for every popped item
+         *          a) print it
+         *          b) push its right child
+         *          c) push its left child
+         *          Note that right child is pushed first so that left is processed first
+         * @return
+         */
+        @Override
+        public Node<T> next() {
+            Node current = parents.pop();
+
+            if (current.right != null){
+                parents.push(current.right);
+            }
+            if (current.left != null){
+                parents.push(current.left);
+            }
+
+            return current;
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree<Integer> tree = new BinaryTree<Integer>(45);
         Node<Integer> left = tree.root.left= new Node<Integer>(25);

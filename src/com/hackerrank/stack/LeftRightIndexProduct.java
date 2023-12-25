@@ -7,6 +7,11 @@ import java.util.Stack;
 
 /**
  * Created by Rajesh on 11/18/2017.
+ * You are given a list of  numbers . For each element at position i (), we define Left(i) and  Right(i) as:
+ *  Left(i) = closest index j such that j < i and a_j > a_i </>. If no such j exists then j = 0.
+ *  Right(i) = closest index k such that k > i and a_k > a_i. If no such k exists then k = 0.
+ *
+ * We define  IndexProduct(i)=  Left(i) * Right(j) . You need to find out the maximum IndexProduct(i) among all i.
  */
 public class LeftRightIndexProduct {
 

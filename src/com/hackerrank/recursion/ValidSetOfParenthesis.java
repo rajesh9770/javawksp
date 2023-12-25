@@ -31,4 +31,33 @@ public class ValidSetOfParenthesis {
             setParenthesis(open, close-1, ret, buffer, bufferIdx+1);
         }
     }
+
+
+
+
+    public List<String> generateParenthesis2(int n) {
+        List<String> res=new ArrayList();
+        StringBuilder build=new StringBuilder();
+        helper(build,0,0,res,n);
+        return res;
+    }
+    public void helper(StringBuilder build,int op,int cl,List<String> res,int n){
+        if (build.length() == 2 * n) {
+            res.add(build.toString());
+            return;
+        }
+
+        //two options; we could either start new parenthesis or close old one.
+        if (op < n) { //we could start  a new parenthesis
+            build.append("(");
+            helper(build, op + 1, cl, res, n);
+            build.deleteCharAt(build.length() - 1);
+        }
+
+        if (cl < op) { //we can close the previously open parenthesis
+            build.append(")");
+            helper(build, op, cl + 1, res, n);
+            build.deleteCharAt(build.length() - 1);
+        }
+    }
 }

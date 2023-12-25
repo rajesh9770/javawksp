@@ -1,15 +1,18 @@
 package com.hackerrank.stack;
 
 import javafx.util.Pair;
-import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.Arrays;
-import java.util.Scanner;
+
 import java.util.Stack;
 
 /**
  * Created by Rajesh on 11/17/2017.
  *  Read stock span problem before attempting this.  http://www.geeksforgeeks.org/the-stock-span-problem/
+ *  The stock span problem is a financial problem where we have a series of n daily price quotes for a stock
+ *  and we need to calculate the span of the stock’s price for all n days.
+ *  The span Si of the stock’s price on a given day i is defined as the maximum number of consecutive days just
+ *  before the given day, for which the price of the stock on the current day is less than its price on the given day.
  */
 public class PoisonPlants {
 
@@ -71,6 +74,8 @@ public class PoisonPlants {
     /**
      * The span of the stock's price today is defined as the maximum number of consecutive days (starting from today and going backwards)
      * for which the price of the stock was less than or equal to today's price.
+     * [100 80 60 70 60 75 85]
+     * Output: 1 1 1 2 1 4 6
      * See com.hackerrank.stack.ContiguousMaxSubArray.countSubarrays
      */
     public Stack<Pair<Integer, Integer>> stockSpan = new Stack<>(); //store price and how long past it has lower value.
@@ -95,6 +100,23 @@ public class PoisonPlants {
         return span;
     }
 
+    //REad this
+    class StockSpanner {
+        public Stack<Pair<Integer, Integer>> stockSpan = new Stack<>(); //store price and how long past it has lower value.
+        //keep the stackSpan in decr order of price
+        public StockSpanner() {
+
+        }
+
+        public int next(int price) {
+            int days =1;
+            while (!stockSpan.isEmpty() && price >= stockSpan.peek().getKey()){
+                days += stockSpan.pop().getValue();
+            }
+            stockSpan.push(new Pair<>(price, days));
+            return days;
+        }
+    }
 //    public int next(int price) {
 //        int days =1;
 //        while (!stockSpan.isEmpty() && price >= stockSpan.peek().getKey()){//keep the stack strict desc order.

@@ -22,17 +22,17 @@ public class EggDrop {
 
 
 
-    public int superEggDrop(int n, int k) {
-        int [][] numdrops = new int[n+1][k+1];
+    public int superEggDrop(int e, int f) {
+        int [][] numdrops = new int[e+1][f+1];
         int i,j,x;
 
-        for(j=0;j<=k;j++) numdrops[0][j]=0; //not used
-        for(j=0;j<=k;j++) numdrops[1][j]=j; //Because we need j drops if only 1 egg remains, W(1,j)=j.
-        for(i=0;i<=n;i++) numdrops[i][0]=0; //Because 0 floors requires no drops, W(n,0)=0.
+        for(j=0;j<=f;j++) numdrops[0][j]=0; //not used
+        for(j=0;j<=f;j++) numdrops[1][j]=j; //Because we need j drops if only 1 egg remains, W(1,j)=j.
+        for(i=0;i<=e;i++) numdrops[i][0]=0; //Because 0 floors requires no drops, W(n,0)=0.
 
         //This loop fills up the matrix
-        for(i=2;i<=n;i++){
-            for(j=1;j<=k;j++){
+        for(i=2;i<=e;i++){
+            for(j=1;j<=f;j++){
 
                 //Defines the minimum as the highest possible value
                 int minimum=Integer.MAX_VALUE;
@@ -45,6 +45,6 @@ public class EggDrop {
             }
 
         }
-        return numdrops[n][k];
+        return numdrops[e][f];
     }
 }

@@ -163,7 +163,8 @@ public class MaxDifference {
 
 
     /**
-     * Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
+     * Given an array of positive numbers and a positive number ‘k,’
+     * find the maximum sum of any contiguous subarray of size ‘k’.
      */
 
     public static int findMaxSumSubArray(int k, int[] arr) {
@@ -190,12 +191,14 @@ public class MaxDifference {
      * Take the smaller of two heights.
      * The difference between smaller height and height of current element is the amount of water that can be stored in this array element.
      * Think of one histogram as wide block that is 1 unit wide and a[i] tall.
-     *    _
-     *   | |  _
-     *  _| |_| |
-     * | | | | |
+     *    _            _       _
+     *   | |  _       |_|  _  |_|
+     *  _| |_| |      |_|_|_|_|_|
+     * | | | | |      |_|_|_|_|_|
      * ------------------------------
-     * Answer is 1, since only 3rd histogram can hold 1 unit of water.
+     * For first figure, Answer is 1, since only 3rd histogram can hold 1 unit of water.
+     * For the second figure, Answer is  5.
+     * The quetion is asking total amount water that can be stored.
      */
     public static long histogramVolume(int [] a){
         int LHigh[] = new int [a.length];
@@ -221,6 +224,18 @@ public class MaxDifference {
 
     // The main function to find the maximum rectangular area under given
     // histogram with n bars. Taller bar can't go over smaller one. Smaller histogram can go through taller ones.
+    //
+    //
+    //
+    //                   _
+    //                 _|_|_
+    //             _  |_|_|_|
+    //           _|_| |_|_|_|_
+    //          |_|_|_|_|_|_|_|_
+    //          |_|_|_|_|_|_|_|_|
+    //           1 2 3 4 5 6 7 8
+    //Column 4 5 6  (4 * 3 = 12)
+
     public static long getMaxArea(int hist[]){
 
         Stack<Integer> stack = new Stack<>();

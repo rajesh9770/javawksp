@@ -50,7 +50,7 @@ public class LongestCommonSubSequence {
 
     /**
      * Find a longest common subsequence.
-     * @param lcs
+     * @param lcs is already filled
      * @param a
      * @param b
      * @param i

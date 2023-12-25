@@ -5,7 +5,11 @@ package com.hackerrank.dynamicprog;
  * https://www.geeksforgeeks.org/minimum-insertions-to-form-a-palindrome-dp-28/
  */
 /**
- * Consider a row of n coins of values v1 . . . vn, where n is even. We play a game against an opponent by alternating turns. In each turn, a player selects either the first or last coin from the row, removes it from the row permanently, and receives the value of the coin. Determine the maximum possible amount of money we can definitely win if we move first.
+ * Consider a row of n coins of values v1 . . . vn, where n is even.
+ * We play a game against an opponent by alternating turns.
+ * In each turn, a player selects either the first or last coin from the row,
+ * removes it from the row permanently, and receives the value of the coin.
+ * Determine the maximum possible amount of money we can definitely win if we move first.
  *
  * Note: The opponent is as clever as the user.
  *
@@ -18,7 +22,8 @@ package com.hackerrank.dynamicprog;
  */
 
 /**
- * Approach: As both the players are equally strong, both will try to reduce the possibility of winning of each other. Now let’s see how the opponent can achieve this.
+ * Approach: As both the players are equally strong, both will try to reduce the possibility of winning of each other.
+ * Now let’s see how the opponent can achieve this.
  *
  * There are two choices:
  *

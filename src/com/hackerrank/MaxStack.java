@@ -51,7 +51,7 @@ public class MaxStack {
     }
 
     /**
-     * Find the maximum of stack
+     * Find the maximum value from stack as you push/pop elements.
      * @param args
      */
     public static void mainMaxForStack(String[] args) {

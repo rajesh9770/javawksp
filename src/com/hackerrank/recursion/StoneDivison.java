@@ -7,6 +7,12 @@ import java.util.Scanner;
 
 /**
  * Created by Rajesh on 2/25/2018.
+ * Tara has an array, A , consisting of  integers where each integer occurs at most  times in the array.
+ * Let's define P to be a permutation of A where p_i is the i-th element of permutation.
+ * Tara thinks a permutation is beautiful if there is no index  i such that p_i - p_(i+1) = 0 .
+ * You are given q queries where each query consists of some array A.
+ * For each A, help Tara count the number of possible beautiful permutations of the  integers in A and print the count, modulo 10^9 + 7, on a new line.
+ * Note: Two permutations,  and , are considered to be different if and only if there exists an index  such that  and .
  * http://gautamdp.blogspot.com/2016/12/taras-beautiful-permutationsnumber-of.html
  *  Ans_X is denoting maximum number of moves for single pile with height X
  In case no divisors of number  X from set S , Ans_X =0, otherwise  Ans_X = max( X/Y * Ans_Y)

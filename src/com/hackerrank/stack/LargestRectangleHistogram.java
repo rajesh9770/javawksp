@@ -7,6 +7,8 @@ import java.util.Stack;
  * Created by Rajesh on 11/16/2017.
  * https://www.youtube.com/watch?v=VNbkzsnllsU
  * https://tech.pic-collage.com/algorithm-largest-area-in-histogram-84cc70500f0c
+ * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+ * https://leetcode.com/problems/largest-rectangle-in-histogram/
  */
 public class LargestRectangleHistogram {
 
@@ -76,7 +78,7 @@ static long largestRectangle1(int[] h){//O(n^2)
         return maxHeight;
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int[] h = new int[n];
@@ -139,6 +141,88 @@ static long largestRectangle1(int[] h){//O(n^2)
         }
 
         return max_area;
+    }
+
+    //alternate solution for getMaxArea
+    /**
+     *
+     * nextSmallerElements and prevSmallerElements are two private helper methods used to find the indices of the
+     * Next Smaller Element (NSE) and the Previous Smaller Element (PSE) for each bar in the histogram.
+     * These methods use a stack to efficiently find these indices.
+     *
+     * The getMaxArea method is the public method responsible for finding the largest rectangular area possible in the given histogram.
+     *
+     * In the getMaxArea method:
+     *
+     * Two arrays, next and prev, are created to store the indices of NSE and PSE, respectively, for each bar in the histogram.
+     *
+     * The method calls the nextSmallerElements and prevSmallerElements to populate the next and prev arrays.
+     *
+     * A variable area is initialized to INT_MIN, which will be used to track the maximum area found so far.
+     *
+     * The method then iterates through each bar in the histogram.
+     * For each bar, it calculates the width of the rectangle that can be formed using the current bar as the height.
+     * The width is determined by the difference between the index of NSE and the index of PSE (minus one).
+     *
+     * The area of the rectangle is then calculated by multiplying the height (value of the current bar) with the width.
+     * The maximum area found so far (area) is updated if the newly calculated area is greater.
+     * Finally, the maximum area found is returned as the result.
+     */
+    /**
+     * Returns indices: for ret[i] is the index  of the prev smallest element than the hist[i]
+     * @param histo
+     * @return
+     */
+    static int[] prevSmallestElement(int [] histo){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int[] ret = new int[histo.length];
+
+        for (int i=0; i<histo.length; ++i) {
+            while(stack.peek() != -1 && histo[stack.peek()] >= histo[i]){
+                stack.pop();
+            }
+            ret[i] = stack.peek();
+            stack.push(i);
+        }
+        return ret;
+    }
+    static int[] nextSmallestElement(int [] histo){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int[] ret = new int[histo.length];
+
+        for (int i=histo.length-1; i>=0; --i) {
+            while(stack.peek() != -1 && histo[stack.peek()] >= histo[i]){
+                stack.pop();
+            }
+            ret[i] = stack.peek();
+            stack.push(i);
+        }
+        return ret;
+    }
+
+    static int largestRectangleArea(int [] histo) {
+        int n=histo.length;
+        int[] next =nextSmallestElement(histo);
+        int[] prev =prevSmallestElement(histo);
+
+        int area=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            int l=histo[i];
+            if(next[i]==-1){
+                next[i]=n;
+            }
+            int b=next[i]-prev[i]-1;
+            int newArea=l*b;
+            area=Math.max(area,newArea);
+        }
+        return area;
+    }
+
+    public static void main(String[] args) {
+        //System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}) == 10);
+        System.out.println(largestRectangleArea(new int[]{2, 4}) == 4);
 
     }
 }

@@ -135,5 +135,51 @@ public class LRU<K,V> {
     }
 
 
+    class Test{
+
+        Map<String, Node2> map = new HashMap<>();
+        Node2 head = null, tail = null;
+
+        class Node2{
+            String k,v;
+            Node2 prev, next;
+
+            Node2(String k, String v){
+                this.k = k;
+                this.v = v;
+                this.prev = this.next = null;
+            }
+        }
+
+
+        void removeKey(Node2 node){
+            Node2 prev = node.prev;
+            if(prev != null){
+                prev.next = node.next;
+            }else{
+                head = node.next;
+            }
+
+            Node2 next = node.next;
+            if(next != null){
+                next.prev = node.prev;
+            }else{
+                tail = node.prev;
+            }
+        }
+
+        void addKey(Node2 node){
+            node.prev = null;
+            node.next = head;
+
+            if(head != null){
+                head.prev = node;
+            }else{
+                head = tail = node;
+            }
+
+        }
+    }
+
 
 }

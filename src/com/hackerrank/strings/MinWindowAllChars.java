@@ -66,7 +66,7 @@ public class MinWindowAllChars {
     }
 
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
 //        System.out.println(~5);
 //        System.out.println(Integer.toBinaryString(~0));
 //        if(true) return;
@@ -83,6 +83,10 @@ public class MinWindowAllChars {
     /**
      * You are given two strings s and t. You can select any substring of string s and rearrange the characters of the selected substring.
      * Determine the minimum length of the substring of s such that string t is a substring of the selected substring.
+     * s = "dcbefebce"
+     * t = "fd"'
+     * output = 5
+     * Basically we want to find a smallest substring of s which contains all the characters of t
      */
     public static int minLengthSubstring(String s, String t){
         Map<Character, Integer> desiredFreq = new HashMap<>();
@@ -121,5 +125,38 @@ public class MinWindowAllChars {
             }
         }
         return min == Integer.MAX_VALUE ?  -1: min;
+    }
+
+    /**
+     * You are given a string s and an integer k.
+     * You can choose any character of the string and change it to any other uppercase English character.
+     * You can perform this operation at most k times.
+     *
+     * Return the length of the longest substring containing the same letter you can get after performing the above operations.
+     */
+    public static int characterReplacement(String s, int k) {
+        int[] counts = new int[26]; //stores the frequency of character
+        Arrays.fill(counts, 0);
+        int start=0;
+
+        int maxFreq = 0;
+        int ans = 0;
+        for(int end=0; end<s.length(); ++end){
+            int newFreq = ++counts[s.charAt(end) - 'A'];
+            maxFreq = Math.max(maxFreq, newFreq);
+            int charsToChange = (end-start+1) - maxFreq;  //think that the character with the most frequency is within the window repeated maxFreq times
+            if( charsToChange > k){
+                counts[s.charAt(start) - 'A']--;
+                start++;
+            }
+            ans = Math.max(ans, end - start +1);
+            System.out.println(s.substring(start, end+1));
+        }
+        return ans;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(characterReplacement("ABBBBBBBBCPQRTSLBBBBBBBBBBBBBBBBBBBBBBAC", 2));//24
     }
 }

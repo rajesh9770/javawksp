@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 /**
  * Count the swaps in the bubble sort

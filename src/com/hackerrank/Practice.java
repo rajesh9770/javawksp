@@ -27,12 +27,15 @@ public class Practice {
         int n = in.nextInt();
         int longOnes = 0;
         while(n>0){
-            n &= (n>>1);
+            n &= (n>>1);//idea is the longer sequence of 1's will only survive till end
             ++longOnes;
         }
         System.out.println(longOnes);
     }
 
+    public static void main(String[] args) {
+        mainForConsecutiveOnesInBinary(null);
+    }
     public static void mainForStrangeCounter(String[] args) {
         Scanner in = new Scanner(System.in);
         long n = in.nextLong();
@@ -110,7 +113,7 @@ public class Practice {
         System.out.println(valleyCount);
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         Scanner in = new Scanner(System.in);
         int Q = in.nextInt();
         for(int a0 = 0; a0 < Q; a0++) {

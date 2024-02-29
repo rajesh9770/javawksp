@@ -34,7 +34,7 @@ public class YoungTableu {
     public static int [][] generateSortedYTableu(int rows, int cols, int bound){
         int ret [][] = new int [rows][cols];
         for(int i=0; i<rows; ++i){
-            //generate sorted rows
+            //generate random rows
             int [] row = new int [cols];
             for(int j=0; j<cols; ++j){
                 row[j]=rand.nextInt(bound);

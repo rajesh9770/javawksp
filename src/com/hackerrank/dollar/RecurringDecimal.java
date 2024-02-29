@@ -7,7 +7,7 @@ public class RecurringDecimal {
 
     public static void main(String[] args) {
         //System.out.println(new RecurringDecimal().fractionToDecimal(-1, -2147483648));
-        System.out.println(new RecurringDecimal().fractionToDecimal(-1, -3));
+        System.out.println(new RecurringDecimal().fractionToDecimal(-1, -30));
     }
     public String fractionToDecimal(int numerator, int denominator) {
          if(numerator ==0) return "0";

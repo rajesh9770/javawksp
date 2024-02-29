@@ -9,7 +9,8 @@ package com.hackerrank.dynamicprog;
  * 'B' -> "2"
  * ...
  * 'Z' -> "26"
- * To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example, "11106" can be mapped into:
+ * To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above
+ * (there may be multiple ways). For example, "11106" can be mapped into:
  *
  * "AAJF" with the grouping (1 1 10 6)
  * "KJF" with the grouping (11 10 6)
@@ -65,13 +66,60 @@ public class Decode {
 
     }
 
-    public static void main(String[] args) {
-//        System.out.println(new Decode().numDecodings("12") == 2);
-//        System.out.println(new Decode().numDecodings("226") == 3);
-//        System.out.println(new Decode().numDecodings("106") == 1);
-//        System.out.println(new Decode().numDecodings("06") == 0);
-//        System.out.println(new Decode().numDecodings("2101") == 1);
-//        System.out.println(new Decode().numDecodings("10011") == 0);
+    public static void mainForDecode(String[] args) {
+        System.out.println(new Decode().numDecodings("12") == 2);
+        System.out.println(new Decode().numDecodings("226") == 3);
+        System.out.println(new Decode().numDecodings("106") == 1);
+        System.out.println(new Decode().numDecodings("06") == 0);
+        System.out.println(new Decode().numDecodings("2101") == 1);
+        System.out.println(new Decode().numDecodings("10011") == 0);
         System.out.println(new Decode().numDecodings("1201234") == 3);
     }
+
+
+    /**
+     * https://leetcode.com/problems/unique-paths/
+     * There is a robot on an m x n grid.
+     * The robot is initially located at the top-left corner (i.e., grid[0][0]).
+     * The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]).
+     * The robot can only move either down or right at any point in time.
+     *
+     * Given the two integers m and n, return the number of possible unique paths that the robot
+     * can take to reach the bottom-right corner.
+     *
+     * The test cases are generated so that the answer will be less than or equal to 2 * 109.
+     *
+     * This is same as going from grid[m - 1][n - 1] to grid[0][0] with only left and up turns are allowed.
+     *
+     * also combinatorially, you are going down by m -1 and right by n-1. Any path can be written as combination of
+     * m-1 D and n-1 R's. e.g DDDRDR for m = 5 and R = 3.
+     *
+     * Total permutations = (m-1+n-1)! / ((m-1)! * (n-1)!)
+     */
+    public int uniquePaths(int m, int n) {
+        if(m==1 && n==1) return 1;
+        int[][] ret = new int[m][n];
+        ret[0][0] = 0;
+        for(int i=1; i<m; ++i){
+            ret[i][0] = 1; //from column only ups are allowed
+        }
+        for(int j=1; j<n; ++j){
+            ret[0][j] = 1; //from row only lefts are allowed
+        }
+
+        for(int i=1; i<m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                ret[i][j] = ret[i-1][j] //go left first
+                            + ret[i][j-1]; // go up first
+            }
+        }
+        return ret[m-1][n-1];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Decode().uniquePaths(3, 7) == 28);
+        System.out.println(new Decode().uniquePaths(3, 2) == 3);
+        System.out.println(new Decode().uniquePaths(1, 1) == 1);
+    }
+
 }

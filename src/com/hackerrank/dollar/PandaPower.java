@@ -19,6 +19,18 @@ public class PandaPower {
         return result;
     }
 
+    public static int gcd2(int dividend, int divisor){
+        int n = Math.max(dividend, divisor);
+        int d = Math.min(dividend, divisor);
+
+        while(n%d != 0){
+            int r = n%d;
+            n = d;
+            d = r;
+        }
+        return d;
+    }
+
     //Euclid's algorithm
     private static int[] gcd(int dividend, int divisor) {
 
@@ -40,21 +52,22 @@ public class PandaPower {
 
     public static void main(String[] args) {
 
-        Scanner in = new Scanner(System.in);
-        int q = in.nextInt();
-        while(q-->0){
-            int a = in.nextInt();
-            int b = in.nextInt();
-            int x = in.nextInt();
-            if(b<0){
-                int[] gcd = gcd(x, a);
-                a = gcd[1] % x;
-                if(a<0) a += x;
-                //System.out.println("Inverse " + a);
-                b = -b;
-            }
-            //System.out.println(a + " " + b + " " + x);
-            System.out.println(modpow(a,b,x));
-        }
+        System.out.println(gcd2(23, 6));
+//        Scanner in = new Scanner(System.in);
+//        int q = in.nextInt();
+//        while(q-->0){
+//            int a = in.nextInt();
+//            int b = in.nextInt();
+//            int x = in.nextInt();
+//            if(b<0){
+//                int[] gcd = gcd(x, a);
+//                a = gcd[1] % x;
+//                if(a<0) a += x;
+//                //System.out.println("Inverse " + a);
+//                b = -b;
+//            }
+//            //System.out.println(a + " " + b + " " + x);
+//            System.out.println(modpow(a,b,x));
+//        }
     }
 }

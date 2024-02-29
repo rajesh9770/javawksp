@@ -5,7 +5,7 @@ import java.util.Stack;
 
 /**                             direction bottom to top
  * ContiguousMaxSubArray        desc                pop top < new
- * Histogram Area               strictly incr       pop new <= top
+ * Histogram Area,ValidSubArray strictly incr       pop new <= top
  * Stock Span                   strictly desc       pop top <=new
  *
  * In case stack is desc, all elements (from array not in the stack) between pop and next pop are less than the pop.
@@ -18,7 +18,8 @@ import java.util.Stack;
 public class ContiguousMaxSubArray {
 
     /**
-     * You are given an array arr of N integers. For each index i, you are required to determine the number of contiguous subarrays that fulfills the following conditions:
+     * You are given an array arr of N integers. For each index i, you are required to determine the number of contiguous subarrays
+     * that fulfills the following conditions:
      * The value at index i must be the maximum element in the contiguous subarrays, and
      * These contiguous subarrays must either start from or end on index i.
      *

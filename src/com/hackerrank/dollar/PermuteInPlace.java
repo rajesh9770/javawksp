@@ -141,7 +141,8 @@ public class PermuteInPlace {
 
 
     /**
-     * There are n students, numbered from 1 to n, each with their own yearbook. They would like to pass their yearbooks around and get them signed by other students.
+     * There are n students, numbered from 1 to n, each with their own yearbook. They would like to pass their yearbooks around
+     * and get them signed by other students.
      * You're given a list of n integers arr[1..n], which is guaranteed to be a permutation of 1..n
      * (in other words, it includes the integers from 1 to n exactly once each, in some order). The meaning of this list is described below.
      * Initially, each student is holding their own yearbook.
@@ -164,7 +165,7 @@ public class PermuteInPlace {
      *
      * n=4
      * arr=[3,2,1,4]
-     * output=
+     * output=[2, 1, 2, 4]
      */
     static int[] findSignatureCounts(int[] arr) {
         // Write your code here

@@ -1,10 +1,11 @@
-package com.problem;
+package com.hackerrank.strings;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
+ * Scheduling
  * Given start and stop times for jobs along a time line.
  * At time t, find how many jobs are running.
  * Over entire time line find the maximum jobs that are running at the same instance.

@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -135,51 +135,89 @@ public class LRU<K,V> {
     }
 
 
-    class Test{
+    public static class LRU2{
 
-        Map<String, Node2> map = new HashMap<>();
-        Node2 head = null, tail = null;
+        Map<String, Node> map;
+        Node head, tail;
+        int capacity;
+        public static class Node{
+          public  String k,v;
+          public Node prev, next;
 
-        class Node2{
-            String k,v;
-            Node2 prev, next;
-
-            Node2(String k, String v){
-                this.k = k;
-                this.v = v;
-                this.prev = this.next = null;
-            }
+          public Node(String k, String v){
+              this.k = k;
+              this.v = v;
+          }
         }
 
 
-        void removeKey(Node2 node){
-            Node2 prev = node.prev;
-            if(prev != null){
-                prev.next = node.next;
-            }else{
-                head = node.next;
-            }
 
-            Node2 next = node.next;
-            if(next != null){
-                next.prev = node.prev;
-            }else{
-                tail = node.prev;
-            }
+        public LRU2(){
+            map = new HashMap<>();
+            head = tail = null;
+            this.capacity = 100;
         }
 
-        void addKey(Node2 node){
-            node.prev = null;
+
+        public void setHead(Node node){
             node.next = head;
+            node.prev = null;
 
-            if(head != null){
-                head.prev = node;
-            }else{
+            if(head == null){
                 head = tail = node;
+            }else {
+                head.prev = node;
+                head = node;
             }
+        }
 
+        public void removeFromList(Node node){
+            Node prev = node.prev;
+            if(prev == null){//node is head
+                head = node.next;
+                node.next = null;
+            }else{
+                prev.next = node.next;
+            }
+            Node next = node.next;
+            if(next == null){//node is tail
+                tail = node.prev;
+            }else{
+                next.prev = node.prev;
+                node.prev = null;
+            }
+        }
+
+        public String get(String key){
+            if(map.containsKey(key)){
+                Node node = map.get(key);
+                removeFromList(node);
+                setHead(node);
+                return node.k;
+
+            }else{
+                return null;
+            }
+        }
+
+        public String put(String key, String value){
+            String oldValue = null;
+            if(map.containsKey(key)){
+                Node node = map.get(key);
+                oldValue = node.v;
+                map.remove(key);
+                removeFromList(node);
+            }else if (map.size() == capacity){
+                map.remove(tail.k);
+                removeFromList(tail);
+            }
+            Node newNode = new Node(key, value);
+            map.put(key, newNode);
+            setHead(newNode);
+            return oldValue;
         }
     }
+
 
 
 }

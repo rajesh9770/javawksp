@@ -70,6 +70,9 @@ public class InvertBinaryTree {
         root.left = invert(right);
         root.right = invert(left);
 
+//        root.left = invert(root.right);
+//        root.right = invert(root.left);
+
         return root;
     }
 

@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 /**
  * Given a char array representing tasks CPU need to do. It contains capital letters A to Z where different letters represent different tasks.

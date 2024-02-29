@@ -786,38 +786,6 @@ ZZYYZZYYZZZAZZZB
     }
 
     /**
-     * You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
-     *
-     * On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time.
-     * However, you can buy it then immediately sell it on the same day.
-     *
-     * Find and return the maximum profit you can achieve.
-     * @param prices
-     * @return
-     */
-    public int maxStockProfit(int[] prices) {
-        int profit = 0;
-        boolean buy = true;
-        int pricePaid = 0;
-        for (int i=0; i<prices.length; ++i) {
-            if (buy) {
-                if (i + 1 < prices.length && prices[i] < prices[i + 1]) { //buy it
-                    buy = false;
-                    pricePaid = prices[i];
-                }
-            } else {
-                if (pricePaid < prices[i]) {
-                    if (i + 1 == prices.length || prices[i] > prices[i + 1]) { //sell it
-                        buy = true;
-                        profit += (prices[i] - pricePaid);
-                    }
-                }
-            }
-        }
-        return profit;
-    }
-
-    /**
      * Given an array A, partition it into two (contiguous) subarrays left and right so that:
      *
      * Every element in left is less than or equal to every element in right.
@@ -891,7 +859,151 @@ ZZYYZZYYZZZAZZZB
         return buff.toString();
     }
 
+    /**
+     * You are given a 0-indexed array nums consisting of positive integers.
+     *
+     * There are two types of operations that you can apply on the array any number of times:
+     *
+     * Choose two elements with equal values and delete them from the array.
+     * Choose three elements with equal values and delete them from the array.
+     * Return the minimum number of operations required to make the array empty, or -1 if it is not possible.
+     * @param nums
+     * @return
+     */
+    public int minOperations(int[] nums) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int num : nums) {
+            Integer ct = freq.containsKey(num) ? freq.get(num): 0;
+            ct = ct +1;
+            freq.put(num, ct);
+        }
+        int ret = 0;
+        for (Integer value : freq.values()) {
+            if(value % 3 == 0){
+                ret += value/3;
+                continue;
+            }else if(value % 3 ==1){
+                if(value > 3){
+                    ret = ret + ((value -4) / 3) + 2;
+                }else{
+                    return  -1; //value is 1
+                }
+            }else if(value %3 == 2){
+                ret = ret + (value - 2)/3 + 1;
+            }
+        }
+        return ret;
+    }
 
+    /**
+     * Given a m x n matrix mat and an integer threshold,
+     * return the maximum side-length of a square with a sum less than or equal to threshold or return 0
+     * if there is no such square.
+     * https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/
+     */
+    public int maxSideLength(int[][] mat, int threshold) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int[][] sums = new int[m + 1][n + 1];
+        int max = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                sums[i + 1][j + 1] = sums[i + 1][j] + sums[i][j + 1] - sums[i][j] + mat[i][j];
+                if (i - max >= 0 && j - max >= 0 &&
+                        sums[i + 1][j + 1] - sums[i - max][j + 1] - sums[i + 1][j - max] + sums[i - max][j - max] <= threshold
+                ) {
+                    max += 1;
+                }
+            }
+        }
+
+        return max;
+    }
+
+    //https://leetcode.com/problems/largest-plus-sign/solution/
+    public int orderOfLargestPlusSign(int n, int[][] mines) {
+        Set<Integer> with0 = new HashSet<>();
+        for (int[] mine : mines) {
+            with0.add(mine[0] * n + mine[1]);
+        }
+
+        int ans=0;
+        int [][] dp = new int[n][n];
+
+        for(int i=0; i<n; ++i){
+            int count =0;
+            for(int j=0; j<n; ++j){ //going right in a row
+                if(with0.contains(i*n + j)){
+                    count = 0;
+                }else{
+                    ++count;
+                }
+                dp[i][j] = count;
+            }
+
+            count =0;
+            for(int j=n-1; j>=0; --j){ //going left in a row
+                if(with0.contains(i*n + j)){
+                    count = 0;
+                }else{
+                    ++count;
+                }
+                dp[i][j] = Math.min(count, dp[i][j]);
+            }
+        }
+
+        for(int j=0; j<n; ++j){
+            int count =0;
+            for(int i=0; i<n; ++i){ //going down in a col j
+                if(with0.contains(i*n + j)){
+                    count = 0;
+                }else{
+                    ++count;
+                }
+                dp[i][j] = Math.min(count, dp[i][j]);
+            }
+
+            count =0;
+            for(int i=n-1; i>=0; --i){ //going up in a col j
+                if(with0.contains(i*n + j)){
+                    count = 0;
+                }else{
+                    ++count;
+                }
+                dp[i][j] = Math.min(count, dp[i][j]);
+                ans = Math.max(ans, dp[i][j]);
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+     * @param matrix
+     * @return
+     */
+    public int maximalSquare(char[][] matrix) {
+        int [][] dp = new int[matrix.length+1][matrix[0].length+1];
+        for(int i=0; i<matrix.length +1 ; ++i){
+            dp[i][0] = 0;
+        }
+        for(int j=0; j<matrix[0].length +1 ; ++j){
+            dp[0][j] = 0;
+        }
+        int max =0;
+        for(int i=1; i<matrix.length +1 ; ++i){
+            for(int j=1; j<matrix[0].length +1 ; ++j){
+                if(matrix[i-1][j-1] == '1') {
+                    dp[i][j] = Math.min(Math.min(dp[i-1][j-1], dp[i-1][j]), dp[i][j-1]) +1;
+                }else{
+                    dp[i][j] = 0;
+                }
+                max = Math.max(max, dp[i][j]);
+            }
+        }
+        return max * max;
+    }
 
     public static void main(String[] args) {
         //System.out.println(rotationalCipher("Zebra-493?", 3));

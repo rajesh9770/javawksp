@@ -83,8 +83,8 @@ public class LongestCommonSubString {
 
     public static void main(String[] args) {
         //lcp("abcba"); //ans: abcba
-        String X = "OldSite:GeeksforGeeks.orgAAYYYYYYYYYY";
-        String Y = "NewSite:GeeksAAYYYYYYYYYYQuiz.com";
+        String X = "Oldsit1e11"; //"OldSite:GeeksforGeeks.orgAAYYYYYYYYYY";
+        String Y = "Newsit2e2"; //"NewSite:GeeksAAYYYYYYYYYYQuiz.com";
         lcsubstring(X, Y);
     }
 

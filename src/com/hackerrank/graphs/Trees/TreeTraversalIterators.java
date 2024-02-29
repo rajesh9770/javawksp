@@ -152,7 +152,7 @@ public class TreeTraversalIterators {
         }
     }
 
-    public static void main(String[] args) {
+    public static void mainForPostOrder(String[] args) {
         Node root = new Node("A");
         root.setLeft("B").setRight("D").setLeft("E");
         root.setRight("C");
@@ -160,7 +160,7 @@ public class TreeTraversalIterators {
         treeTraversalIterators.postorder(root);
         System.out.println("");
 
-        PostorderSuccesor postorderSuccesor = treeTraversalIterators.new PostorderSuccesor(root);
+        PostorderSuccesorPractice postorderSuccesor = treeTraversalIterators.new PostorderSuccesorPractice(root);
         while (postorderSuccesor.hasNext()){
             System.out.print(postorderSuccesor.next());
         }
@@ -170,9 +170,100 @@ public class TreeTraversalIterators {
         treeTraversalIterators.postorder(root);
         System.out.println("");
 
-        postorderSuccesor = treeTraversalIterators.new PostorderSuccesor(root);
+        postorderSuccesor = treeTraversalIterators.new PostorderSuccesorPractice(root);
         while (postorderSuccesor.hasNext()){
             System.out.print(postorderSuccesor.next());
+        }
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node("A");
+        root.setLeft("B").setRight("D").setLeft("E");
+        root.setRight("C");
+        TreeTraversalIterators treeTraversalIterators = new TreeTraversalIterators();
+        treeTraversalIterators.inorder(root);
+        System.out.println("");
+
+        InorderSuccesorPractice inorderSuccesor = treeTraversalIterators.new InorderSuccesorPractice(root);
+        while (inorderSuccesor.hasNext()){
+            System.out.print(inorderSuccesor.next());
+        }
+        System.out.println("");
+        root.right.setLeft("F").setRight("G");
+        root.right.setRight("H").setLeft("I");
+        treeTraversalIterators.inorder(root);
+        System.out.println("");
+
+        inorderSuccesor = treeTraversalIterators.new InorderSuccesorPractice(root);
+        while (inorderSuccesor.hasNext()){
+            System.out.print(inorderSuccesor.next());
+        }
+    }
+
+    //Postorder succesor
+    public class PostorderSuccesorPractice implements Iterator{
+        Stack<Node> stack = new Stack();
+
+        public PostorderSuccesorPractice(Node root){
+            traverseToLeftMostLeaf(root);//An iterator would start with the leftmost leaf (not necessarily the leftmost node).
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        @Override
+        public Object next() {
+            if (stack.isEmpty()) return null;
+            Node ret = stack.pop();
+            Node parent = !stack.isEmpty() ? stack.peek() : null ; //look at the parent and go right, do not pop the  parent yet
+            if(parent != null){
+                //if removed element is the left child of top of stack, then next we are visiting a parent,
+                // so before that go to the right and find the next left most leaf.
+                if(parent.left == ret){
+                    traverseToLeftMostLeaf(parent.right);
+                }
+            }
+            return ret;
+        }
+
+        private void traverseToLeftMostLeaf(Node node){ //fills stack upto with the leftmost leaf starting from node
+            Node tmp = node;
+            while(tmp != null){
+                stack.push(tmp);
+                tmp = tmp.left != null ? tmp.left : tmp.right;
+            }
+        }
+    }
+
+    public class InorderSuccesorPractice implements Iterator{
+        Stack<Node> stack = new Stack();
+
+        public InorderSuccesorPractice(Node root){
+            //An iterator would start with the leftmost node
+            traverseToLeftMostNode(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+
+        @Override
+        public Object next() {
+            if (stack.isEmpty()) return null;
+            Node ret = stack.pop();
+            traverseToLeftMostNode(ret.right);//go right and then left
+            return ret;
+        }
+
+        public void traverseToLeftMostNode(Node node){
+            Node tmp = node;
+            while(tmp != null){
+                stack.push(tmp);
+                tmp = tmp.left;
+            }
         }
     }
 }

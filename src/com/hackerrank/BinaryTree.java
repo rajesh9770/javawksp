@@ -41,7 +41,7 @@ public class BinaryTree<T> {
     
     public class postTraverseIterator implements Iterator<Node<T>> {
 
-        private Node<T> prev;
+        private Node<T> prev; //need prev to track when we have to right from root
         private Stack<Node<T>> parents;
         
         public postTraverseIterator() {
@@ -79,7 +79,7 @@ public class BinaryTree<T> {
                 next = parents.pop();
             }else{
                 Node<T> parent = parents.peek();
-                if(parent.left == prev){
+                if(parent.left == prev){ //if prev is left-child of curr, then before giving the curr we have to go right and find the left most leaf.
                     if(parent.right != null){
                         getLeftMostLeaf(parent.right, parents);
                     }

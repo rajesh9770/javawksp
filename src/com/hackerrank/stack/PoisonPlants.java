@@ -4,6 +4,7 @@ import javafx.util.Pair;
 
 import java.util.Arrays;
 
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -13,6 +14,15 @@ import java.util.Stack;
  *  and we need to calculate the span of the stock’s price for all n days.
  *  The span Si of the stock’s price on a given day i is defined as the maximum number of consecutive days just
  *  before the given day, for which the price of the stock on the current day is less than its price on the given day.
+ *
+ *
+ * There are a number of plants in a garden.
+ * Each of the plants has been treated with some amount of pesticide.
+ * After each day, if any plant has more pesticide than the plant on its left, being weaker than the left one, it dies.
+ *
+ * You are given the initial values of the pesticide in each of the plants.
+ * Determine the number of days after which no plant dies,
+ * i.e. the time after which there is no plant with more pesticide content than the plant to its left.
  */
 public class PoisonPlants {
 
@@ -69,6 +79,32 @@ public class PoisonPlants {
 
     }
 
+    static int poisonousPlants(List<Integer> p ){
+        Stack<Data> st = new Stack<>();//keep the stack in ascending as in largest rectangle histogram
+        int ans = 0;
+        for(int i=0; i<p.size(); ++i){
+            int val = p.get(i);
+            if(st.isEmpty()){
+                st.push(new Data(val, -1));
+            }else if(st.peek().value < val){
+                st.push(new Data(val, 1));
+                ans = Math.max(ans, 1);
+            }else{
+                int dd = -1;
+                while(!st.isEmpty() && st.peek().value >= val){
+                    Data left = st.pop();
+                    dd = Math.max(dd, left.deathDay);
+                }
+                if(st.isEmpty()){
+                    st.push(new Data(val, -1));
+                }else{
+                    st.push(new Data(val, dd+1));
+                    ans = Math.max(ans, dd+1);
+                }
+            }
+        }
+        return ans;
+    }
 
     //#901. Online Stock Span
     /**

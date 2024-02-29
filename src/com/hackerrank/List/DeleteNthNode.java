@@ -17,6 +17,10 @@ public class DeleteNthNode {
         ListNode first = dummy;
         ListNode second = dummy;
 
+        // -1     0 1 2 ... n-1  n
+        //  *     n           1  * <-- second
+        //  first                second
+        // as second falls off, first will be the node before the n-th node from end. (end will be at 1 - second row)
         for(int i=0; i<n+1; ++i) {
             if(second!= null){
                 second = second.next;
@@ -55,13 +59,13 @@ public class DeleteNthNode {
         ListNode listNode4 = new DeleteNthNode.ListNode(4, listNode3);
         ListNode listNode5 = new DeleteNthNode.ListNode(5, listNode4);
 
-        ListNode head = listNode5;
+        ListNode head = listNode1;
         while(head != null){
             System.out.println(head.val);
             head = head.next;
         }
-        head = listNode5;
-        head = removeNthFromEndPractice(head, 2);
+        head = listNode1;
+        head = removeNthFromEnd(head, 1);
         System.out.println("After Removal");
         while(head != null){
             System.out.println(head.val);

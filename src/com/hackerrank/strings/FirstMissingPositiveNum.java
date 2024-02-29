@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 import java.util.Arrays;
 
@@ -30,11 +30,32 @@ public class FirstMissingPositiveNum {
         a[j] = tmp;
     }
 
+    public static int firstMissingPositive2(int[] A) {
+        int n = A.length;
+        //ans is between [1,n+1];
+        //use A[i-1] to store the information about the (i)-th element 1<=i<=n
+        //replace all numbers that are out side the range [1, n]
+        for(int i=0; i<n; ++i){
+            if(A[i] < 0 || A[i]> n) A[i] = 0;
+        }
+        for(int i=0; i<n; ++i){
+            int idx = (A[i] % (n + 1)) - 1;
+            if(idx>=0 && idx<n){
+                A[idx] += (n+1);  // A[idx] will be more than n
+            }
+        }
+        for(int i=0; i<n; ++i){
+            if(A[i] <= n){
+                return i+1;
+            }
+        }
+        return n+1;
+    }
     public static void main(String[] args) {
-        int [] A = new int [] {3,4, 9, 1};
+        int [] A = new int[] {0, 0}; //new int [] {3,4, 9, 1};
 
         System.out.println(Arrays.toString(A));
-        System.out.println(firstMissingPositive(A));
+        System.out.println(firstMissingPositive2(A));
         System.out.println(Arrays.toString(A));
     }
 }

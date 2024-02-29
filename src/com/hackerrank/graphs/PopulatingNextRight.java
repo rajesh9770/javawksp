@@ -1,5 +1,8 @@
 package com.hackerrank.graphs;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * You are given a binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
  *
@@ -64,6 +67,26 @@ public class PopulatingNextRight {
                 prevHeadQ = prevHeadQ.next;
             }
             prevHeadQ = currLevelHead;
+        }
+        return root;
+    }
+
+    public Node connectUsingBFS(Node root) {
+        Queue<Node> level = new LinkedList<>();
+        level.add(root.left);
+        level.add(root.right);
+        while(!level.isEmpty()){
+            int size = level.size();
+            Node prev = null;
+            for(int i=0; i<size; ++i){//process current level
+                Node next = level.poll();
+                if(prev != null){
+                    prev.next = next;
+                    prev = next;
+                }
+                level.offer(next.left); //add elements from next level
+                level.offer(next.right);
+            }
         }
         return root;
     }

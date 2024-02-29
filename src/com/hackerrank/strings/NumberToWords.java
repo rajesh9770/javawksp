@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 public class NumberToWords
 {
@@ -42,9 +42,10 @@ public class NumberToWords
 
     public static void main(String[] args) {
         NumberToWords numberToWords = new NumberToWords();
-        System.out.println(numberToWords.numberToWords(1234567));
-        System.out.println(numberToWords.numberToWords(50868));
-        System.out.println(numberToWords.numberToWords(100000));
+//        System.out.println(numberToWords.numberToWords(1234567));
+//        System.out.println(numberToWords.numberToWords(50868));
+//        System.out.println(numberToWords.numberToWords(100000));
+        System.out.println(numberToWords.numberToWords(2000));
     }
 }
 

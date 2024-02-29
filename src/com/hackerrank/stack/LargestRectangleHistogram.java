@@ -7,7 +7,8 @@ import java.util.Stack;
  * Created by Rajesh on 11/16/2017.
  * https://www.youtube.com/watch?v=VNbkzsnllsU
  * https://tech.pic-collage.com/algorithm-largest-area-in-histogram-84cc70500f0c
- * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+ * Given an array of integers heights representing the histogram's bar height where the width of each bar is 1,
+ * return the area of the largest rectangle in the histogram.
  * https://leetcode.com/problems/largest-rectangle-in-histogram/
  */
 public class LargestRectangleHistogram {

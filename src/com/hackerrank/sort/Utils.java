@@ -6,7 +6,7 @@ package com.hackerrank.sort;
 public class Utils {
 
     /**
-     * returns an index such that all elements to the right of index are <= arr[index]
+     * returns an index such that all elements to the left of index are <= arr[index]
      *
      * @param array
      * @param begin

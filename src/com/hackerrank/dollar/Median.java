@@ -1,6 +1,9 @@
 package com.hackerrank.dollar;
 
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Median {
 
@@ -79,5 +82,24 @@ public class Median {
                 return getMin(nums1, nums2);
             }
         }
+    }
+
+    //Median of stream
+    private Queue<Integer> left = new PriorityQueue(1, (Comparator<Integer>) (o1, o2) -> o2 - o1); //max-heap
+
+    private Queue<Integer> right = new PriorityQueue(); //min-heap
+    // Adds a number into the data structure.
+    public void addNum(int num) {
+        right.add(num);
+        left.add(right.poll());
+        if (right.size() < left.size())
+            right.add(left.poll());
+    }
+
+    // Returns the median of current data stream
+    public double findMedian() {
+        return right.size() > left.size()
+                ? right.peek()
+                : (right.peek() + left.peek()) / 2.0;
     }
 }

@@ -80,9 +80,49 @@ public class SplitForEqualAvg {
     }
 
     public static void main(String[] args) {
-        System.out.println(new SplitForEqualAvg().splitArraySameAverage(new int[] {1,2,3,4,5,6,7,8}));
-        long l = System.currentTimeMillis();
-        System.out.println(new SplitForEqualAvg().splitArraySameAverage(new int[] {60,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30}));
-        System.out.println(System.currentTimeMillis()-l);
+//        System.out.println(new SplitForEqualAvg().splitArraySameAverage(new int[] {1,2,3,4,5,6,7,8}));
+//        long l = System.currentTimeMillis();
+//        System.out.println(new SplitForEqualAvg().splitArraySameAverage(new int[] {60,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30}));
+//        System.out.println(System.currentTimeMillis()-l);
+        System.out.println(minimumAverageDifference(new int[] {2,5,3,9,5,3} ));
+
+    }
+
+    /**
+     * You are given a 0-indexed integer array nums of length n.
+     *
+     * The average difference of the index i is the absolute difference between the average of the first i + 1 elements of nums
+     * and the average of the last n - i - 1 elements. Both averages should be rounded down to the nearest integer.
+     *
+     * Return the index with the minimum average difference. If there are multiple such indices, return the smallest one.
+     * @param nums
+     * @return
+     */
+    public static int minimumAverageDifference(int[] nums) {
+        long total = 0;
+        for(int i=0; i<nums.length; ++i){
+            total += nums[i];
+        }
+        long firstSum = 0;
+        long seconSum;
+        long diff = Long.MAX_VALUE;
+        int ans = 0;
+        for(int i=0; i<nums.length; ++i){
+            firstSum += nums[i];
+            seconSum = total - firstSum;
+            long abs;
+            if(i<nums.length-1) {
+                abs = Math.abs(firstSum / ((i + 1)) - (seconSum / (nums.length - (i + 1))));
+            }else{
+                abs = Math.abs(firstSum / (i + 1));
+            }
+            if(abs < diff)
+            {
+                ans = i;
+                diff = abs;
+            }
+        }
+
+        return ans;
     }
 }

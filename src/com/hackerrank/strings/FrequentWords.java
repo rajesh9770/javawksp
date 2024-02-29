@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 public class FrequentWords {
 }

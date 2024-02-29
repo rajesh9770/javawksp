@@ -32,6 +32,14 @@ public class RemoveElement {
             System.out.print(a[i] + " ");
         System.out.println("");
     }
+
+    /**
+     * returns the greatest index smaller than or equal to rightEnd whose value is not b.
+     * @param a
+     * @param b
+     * @param rightEnd
+     * @return
+     */
     private static int findReplacement(int[] a, int b, int rightEnd) {
         while(rightEnd>=0 && a[rightEnd] == b) --rightEnd;
         return rightEnd;
@@ -42,13 +50,15 @@ public class RemoveElement {
     }
 
     public static void main(String[] args) {
-        int [] a = new int[] { 2,2,2,2,2,2,2,2,2,2};
+        int [] a = new int[] { 1, 2,2,2,2,2,2,2,2,2,2};
         RemoveElement.removeElment(a, 2, a.length);
         a = new int[] { 2,2,2,2,2,2,2,2,2,2};
         RemoveElement.removeElment(a, 1, a.length);
         a = new int[] { 2,2,2,2,2,1,1,1,2,2};
         RemoveElement.removeElment(a, 2, a.length);
         a = new int[] { 2,2,2,2,2,1,1,1,2,2};
+        RemoveElement.removeElment(a, 1, a.length);
+        a = new int[] { 2,2,2,2,6,7,2,1,1,1,5,2,2,4};
         RemoveElement.removeElment(a, 1, a.length);
     }
 

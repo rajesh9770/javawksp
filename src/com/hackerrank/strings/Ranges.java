@@ -1,4 +1,4 @@
-package com.problem;
+package com.hackerrank.strings;
 
 import java.util.*;
 
@@ -19,7 +19,13 @@ Here a resource(TV) is shared among people and we are counting how long the reso
 */
 
 public class Ranges {
-
+    /**
+     * IDIOM for overlapping ranges: check if (t1, t2) overlaps (b1, b2)
+     *   b1 <= t2 && t1 <=b2
+     * Same but with different symbols
+     *  for overlapping ranges: check if (a1, b1) overlaps (a2, b2)
+     *      *   a2 <= b1 && a1 <=b2
+     */
     public static class Interval implements Comparable<Interval> {
         int start,end;
         public Interval(int start, int end){
@@ -185,7 +191,7 @@ public class Ranges {
     }
 
 
-    public static void main(String[] args) {
+    public static void mainForProcessIntervals(String[] args) {
 
         Interval [] intervals = new Interval[]{
                 new Interval(1, 4),
@@ -212,5 +218,148 @@ public class Ranges {
                 new Interval(10, 15)
         };
         System.out.println(processIntervals(intervals));
+    }
+
+    /**
+     * Given an array of intervals where intervals[i] = [starti, endi],
+     * merge all overlapping intervals,
+     * and return an array of the non-overlapping intervals that cover all the intervals in the input.
+     */
+
+    public int[][] merge(int[][] intervals) {
+        List<int[]> intervalsList = Arrays.asList(intervals); //ints.get(0) gives first row, etx
+        Collections.sort(intervalsList, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return (o1[0] - o2[0]);
+            }
+        });
+
+        int left = intervalsList.get(0)[0];
+        int right = intervalsList.get(0)[1];
+
+        List<int[]> ret = new ArrayList<>();
+        for(int i=1; i<intervalsList.size(); ++i){
+            int[] nextInterval = intervalsList.get(i);
+            if(nextInterval[0]<=right){
+                right = Math.max(right, nextInterval[1]);
+            }else{
+                ret.add(new int [] {left, right});
+                left = nextInterval[0];
+                right = nextInterval[1];
+            }
+        }
+        ret.add(new int [] {left, right});
+
+        int[][] ints1 = ret.toArray(new int[][]{});
+        return  ints1;
+    }
+
+    public static void main1(String[] args) {
+        int [][] intervals = new int[10][10];
+        for(int i=0; i< 10; i++){
+            for(int j=0; j< 10; j++){
+                intervals[i][j] = (i+1)*(j+1);
+            }
+        }
+        new Ranges().merge(intervals);
+    }
+
+    /**
+     * You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi]
+     * represent the start and the end of the ith interval and intervals is sorted in ascending order by starti.
+     * You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+     *
+     * Insert newInterval into intervals such that intervals is still sorted in ascending order by starti
+     * and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+     *
+     * Return intervals after the insertion.
+     */
+    public int[][] insertBadTiming(int[][] intervals, int[] newInterval) {
+        List<Integer> xCordinates = new ArrayList<>();
+        List<int[]> ret = new ArrayList<>();
+        for (int[] interval : intervals) {
+            xCordinates.add(interval[0]);
+        }
+        int t1 = newInterval[0];
+        int t2 = newInterval[1];
+
+        int[] mergedInterval = new int[2];
+        int mergedIntervalStart, mergedIntervalEnd;
+        int i = Collections.binarySearch(xCordinates, t1);
+        //find the index of the over lapping intervals and merge
+
+        if(i>=0){//matches
+           mergedInterval[0] = t1;
+           mergedIntervalStart = i;
+        }else{
+            i = ~i;
+            //check if previous interval contains t1
+            if(i>0 && t1 <= intervals[i-1][1]){
+                mergedInterval[0] = intervals[i-1][0];
+                mergedIntervalStart = i-1;
+            }else{
+                mergedInterval[0] = t1;
+                mergedIntervalStart = i;
+            }
+        }
+        //now merge the i-th interval
+        int j = Collections.binarySearch(xCordinates, t2);
+        if(j>=0){//matches
+            mergedInterval[1] = intervals[j][1];
+            mergedIntervalEnd = j;
+        }else{
+            j = ~j;
+            //check if previous interval contains t2
+            if(j>0 && t2 <= intervals[j-1][1]){
+                mergedInterval[1] = intervals[j-1][1];
+                mergedIntervalEnd = j-1;
+            }else{
+                mergedInterval[1] = t2;
+                mergedIntervalEnd = j-1;
+            }
+        }
+
+        for(int k=0; k<mergedIntervalStart; ++k){
+            ret.add(intervals[k]);
+        }
+        ret.add(mergedInterval);
+        for(int k=mergedIntervalEnd+1; k<intervals.length; ++k){
+            ret.add(intervals[k]);
+        }
+        return ret.toArray(new int[][]{});
+    }
+
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int i=0;
+
+        List<int[]> ret = new ArrayList<>();
+        while(i<intervals.length && intervals[i][1] < newInterval[0]){ //intervals[i] finishes before newInterval start
+            ret.add(intervals[i]);
+            i++;
+        }
+        int[] mergedInterval = newInterval;
+
+        while(i<intervals.length && intervals[i][0]<= mergedInterval[1]){
+            mergedInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            mergedInterval[1] = Math.max(mergedInterval[1], intervals[i][1]);
+            ++i;
+        }
+        ret.add(mergedInterval);
+        while(i<intervals.length){
+            ret.add(intervals[i]);
+            ++i;
+        }
+
+        return ret.toArray(new int[][]{});
+    }
+
+    public static void main(String[] args) {
+        int[][] insert = new Ranges().insert(new int[][]{{1, 3}, {6, 9}}, new int[]{2, 5});
+        System.out.println(Arrays.stream(insert).toArray());
+        int[][] insert1 = new Ranges().insert(new int[][]{{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}}, new int[]{4, 8});
+        System.out.println(Arrays.stream(insert1).toArray());
+        int[][] insert2 = new Ranges().insert(new int[][]{{}, {5, 7}}, new int[]{2, 5});
+        System.out.println(Arrays.stream(insert2).toArray());
     }
 }

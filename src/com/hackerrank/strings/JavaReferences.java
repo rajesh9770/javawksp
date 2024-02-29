@@ -1,9 +1,8 @@
-package com.problem;
+package com.hackerrank.strings;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
 
 /**
  * Created by Rajesh on 9/30/2017.

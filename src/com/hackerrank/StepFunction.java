@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * You are given a list of size , initialized with zeroes. 
  * You have to perform  operations on the list and output the maximum of final values of all the  elements in the list. 
- * For every operation, you are given three integers ,  and  and you have to add value  to all the elements ranging from index  to 
+ * For every operation, you are given three integers ,  and you have to add value  to all the elements ranging from index  to
  * (both inclusive).
  * First line will contain two integers n  and m separated by a single space.
 Next m lines will contain three integers  a, b  and c separated by a single space.

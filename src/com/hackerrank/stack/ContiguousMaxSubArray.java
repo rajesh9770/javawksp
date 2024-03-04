@@ -14,6 +14,21 @@ import java.util.Stack;
  *      |               |
  *      |               |
  *      |<-  x<3    ->  |
+ *
+ *  Also when push an element onto stack, size of the stack give # of contiguous sub-array ending in that element
+ *  such that leftmost element of that sub-array is greater or equal to all elements in that sub-array.
+ *
+ *
+ *
+ *                          |
+ *                          |
+ *                          |
+ *     |                    |
+ *     |                    |
+ *     | <- x>5          -> |
+ *  In case stack is incr, all elements (from array not in the stack) between pop and next pop are bigger than the pop, since they are knocked by the pop.
+ *  Also when push an element onto stack, size of the stack give # of contiguous sub-array ending in that element
+ *  such that leftmost element of that sub-array is smaller or equal to all elements in that sub-array.
  */
 public class ContiguousMaxSubArray {
 

@@ -39,7 +39,7 @@ public class MinDistanceFromNodes {
     }
 
     public static int[] DFS(int[] edges, int node){
-        int [] distances = new int[edges.length];
+        int [] distances = new int[edges.length];//distances[i] records the distance of i-th node from the node 'node'.
         Arrays.fill(distances,-1);
         int dist = 0;
         while(node != -1 && distances[node] == -1){

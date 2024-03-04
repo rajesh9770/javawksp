@@ -68,10 +68,10 @@ public class Miscellaneous {
         base_value = base_value % modulus;
         long result = 1;
         while(exponent > 0){
-                if (exponent % 2 == 1) result = (result * base_value) % modulus;
+                if (exponent % 2 == 1) result = (result * base_value) % modulus; //this could overflow of result is int
                 exponent = exponent / 2;
                 if(exponent >0 )
-                    base_value = (base_value * base_value) % modulus;
+                    base_value = (base_value * base_value) % modulus; //this could overflow of base_value is int
         }
         return result;
     }

@@ -140,11 +140,12 @@ public class MaxDifference {
      * Find all unique triplets in the array which gives the sum of zero.
      */
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    public static List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
         for (int i=0; i< nums.length; ++i) {
-            if (i>0 && nums[i-1] == nums[i]) continue;
+            if (i>0 && nums[i-1] == nums[i]) continue;//we check if prev number is the same as the current one,
+            // this is not the same as checking if current number is the same as next one.
             //use findPairWithSum to find two numbers that add up to nums[i]
             int left = i+1, right = nums.length-1;
             while (left < right) {
@@ -162,6 +163,10 @@ public class MaxDifference {
         return result;
     }
 
+    public static void main(String[] args) {
+        int [] nums = {-1,0,1,2,-1,-4};//after sort -4 -1 -1 0 1 2
+        System.out.println(threeSum(nums));
+    }
 
     /**
      * Given an array of positive numbers and a positive number ‘k,’
@@ -286,7 +291,7 @@ public class MaxDifference {
         System.out.println("Maximum area is " + getMaxArea(new int[]{2,2,2,2}));
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         mainForMaxArea();
         //System.out.println(numberOfWays(new int[] {1,2,2,4,4,4}, 6));
     }
